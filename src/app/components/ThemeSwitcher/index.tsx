@@ -1,58 +1,27 @@
 'use client'
 
-import { useEffect, useState } from 'react' 
 import { useTheme } from 'next-themes'
-import { Button } from '@nextui-org/button'
+import { SunIcon, MoonIcon } from '@heroicons/react/16/solid'
 
-export default function Themeswitcher() {
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();  
+const ThemeSwitcher = () => {
+  const {resolvedTheme, setTheme} = useTheme();
 
-  useEffect(() => {
-    setMounted(true)
-  }, []);
-
-  if (!mounted) return null;
-
-  const getButtonStyles = (currentTheme: string) => {
-    switch (currentTheme) {
-      case 'light':
-        return 'bg-background border-primary-300 text-primary-300'; // Light theme: neon green (as per your config)
-      case 'dark':
-        return 'bg-background border-primary text-primary'; // Dark theme: neon pink
-      case 'modern':
-        return 'bg-primary-300 text-primary hover:text-primary-foreground'; // Modern theme: neon purple
-      default:
-        return 'bg-primary text-foreground'; // Default to primary and foreground colors
-    }
+  const handleClick = () =>{
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
   }
 
-  return ( 
-    <div className='flex gap-4 px-3'>
-      <Button 
-        size='sm' 
-        variant='ghost' 
-        className={getButtonStyles(theme ?? 'dark')} 
-        onClick={() => setTheme('light')}
-      >
-        Light 
-      </Button>
-      <Button 
-        size='sm' 
-        variant='ghost' 
-        className={getButtonStyles(theme ?? 'dark')} 
-        onClick={() => setTheme('dark')}
-      >
-        Dark
-      </Button>
-      <Button 
-        size='sm' 
-        variant='ghost' 
-        className={getButtonStyles(theme ?? 'dark')} 
-        onClick={() => setTheme('modern')}
-      >
-        Modern
-      </Button>
-    </div>
-  );
+  return(
+    <button 
+      onClick={handleClick} 
+      className='flex items-center justify-center rounded-lg p-2 transition bg-gray-600'
+    >
+      {resolvedTheme === 'dark' ? (
+        <SunIcon className='size-5 transition text-black hover:text-white ' />
+      ) : (
+        <MoonIcon className='size-5 transition hover:text-black'/>
+      )}
+    </button>
+  )
 };
+
+export default ThemeSwitcher;
