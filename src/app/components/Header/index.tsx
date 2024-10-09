@@ -1,8 +1,9 @@
 import Link from "next/link"
+import Themeswitcher from "../ThemeSwitcher"
 
 const Header = () => {
   return (
-    <header className="py-6 sticky top-0">
+    <header className="flex py-6 sticky top-0">
       <nav className="container flex items-center justify-between">
         <ul>
           <li>
@@ -10,6 +11,7 @@ const Header = () => {
           </li>
         </ul>
       </nav>
+      <Themeswitcher />
     </header>
   )
 }

@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-import {nextui} from '@nextui-org/react';
+import { nextui } from '@nextui-org/react';
 
 const config: Config = {
   content: [
@@ -12,55 +12,61 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        neon: {
+          green: '#39FF14', // Bright neon green
+          pink: '#FF6EC7',  // Neon pink (still in light theme if needed)
+          blue: '#00FFFF',  // Neon cyan
+          yellow: '#F5EA00', // Neon yellow
+          orange: '#FF4F00', // Neon orange (for dark theme)
+          purple: '#BF00FF', // Neon purple
+          red: '#FF003F',    // Neon red
+        },
       },
     },
   },
-  plugins: [nextui({
-    themes:{
-      light: {
-        layout: {},
-        colors: {}
-      },
-      dark: {
-        layout: {},
-        colors: {}
-      },
-      modern: {
-        extend: 'dark',
-        colors:{
-          background: '#0D001A',
-          foreground: '#ffffff',
-          primary: {
-          50:  '#3B09601',
-          100: '#520F83',
-          200: '#7318A2',
-          300: '#982302',
-          400: '#c031e2',
-          500: '#DD62ED',
-          600: '#F182F6',
-          700: '#FCADF9',
-          800: '#FDDSF9',
-          900: '#FEECFE',
-          DEFAULT: '#DD62ED', 
-          foreground: '#ffffff'
+  plugins: [
+    nextui({
+      themes: {
+        light: {
+          layout: {},
+          colors: {
+            background: '#ffffff', // Light background
+            foreground: '#000000', // Dark text
+            primary: {
+              300: '#F4743B', // dark orange
+              DEFAULT: '#FF8C00', // Default orange
+              // foreground: '#0A210F', // Dark green text color
+            },
           },
-          focus: '#F182F6'
         },
-        layout: {
-          disabledOpacity: '0.3',
-          radius: {
-            small: '1px',
-            medium: '2px',
-            large: '4px',
+        dark: {
+          layout: {},
+          colors: {
+            background: '#0D001A', // Dark background
+            foreground: '#ffffff', // Light text
+            primary: {
+              DEFAULT: '#ACECF7', // Light neon blue
+              300: '49B6FF', //other blue
+              foreground: '#ffffff', // Light text color
+            },
           },
-          borderWidth: {
-            small: '1px',
-            medium: '2px',
-            large: '3px',
-          }
-        }
-      }
-    }
-  })],
+        },
+        modern: {
+          extend: 'dark',
+          colors: {
+            background: '#0D001A', // Dark background for modern theme
+            foreground: '#000000', // dark text color
+            primary: {
+              DEFAULT: '#000000', // Default neon orange (bright)
+              300: '#E1E289', // yellow 
+              foreground: '#ffffff', // Light text color
+            },
+            focus: '#FF8C00', // Darker neon orange
+          },
+        },
+      },
+    }),
+  ],
 };
+
 export default config;
