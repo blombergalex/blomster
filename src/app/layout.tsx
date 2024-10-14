@@ -9,15 +9,11 @@ export const metadata: Metadata = {
   description: "Where ideas bloom",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" 
-className="">
-      <body className="">
+    <html lang="en"
+    >
+      <body className="text-primary bg-background">
         <Providers>
           <Header />
           <main>
