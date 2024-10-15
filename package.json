@@ -9,8 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
     "@heroicons/react": "^2.1.5",
+    "@mui/joy": "^5.0.0-beta.48",
     "@nextui-org/react": "^2.4.8",
+    "@supabase/ssr": "^0.5.1",
     "framer-motion": "^11.11.4",
     "next": "14.2.14",
     "next-themes": "^0.3.0",
