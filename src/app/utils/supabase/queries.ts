@@ -5,7 +5,7 @@ export const getHomePosts = () => {
   const supabase = createClient()
   return supabase
     .from('posts')
-    .select('id, title, slug, users("email")')
+    .select('id, title, slug, users("username")')
     .order('created_at', {ascending: false})
 }
 
