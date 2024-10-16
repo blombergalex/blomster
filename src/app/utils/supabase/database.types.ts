@@ -44,34 +44,37 @@ export type Database = {
       }
       posts: {
         Row: {
-          contents: string | null
+          content: string | null
           created_at: string
           id: string
           image: string | null
           slug: string
           title: string
+          user_id: string
         }
         Insert: {
-          contents?: string | null
+          content?: string | null
           created_at?: string
           id?: string
           image?: string | null
           slug: string
           title: string
+          user_id: string
         }
         Update: {
-          contents?: string | null
+          content?: string | null
           created_at?: string
           id?: string
           image?: string | null
           slug?: string
           title?: string
+          user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "posts_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
+            foreignKeyName: "posts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -81,17 +84,17 @@ export type Database = {
         Row: {
           email: string
           id: string
-          username: string | null
+          username: string
         }
         Insert: {
           email?: string
           id?: string
-          username?: string | null
+          username: string
         }
         Update: {
           email?: string
           id?: string
-          username?: string | null
+          username?: string
         }
         Relationships: []
       }
