@@ -7,7 +7,7 @@ export default async function PostPage({ params }:{ params: { slug: string }}) {
   const supabase = createClient()
   const {data, error} = await supabase
     .from('posts')
-    .select('title, content, users("username")')
+    .select('title, content, users("username"), timestampz') //varför blir det error när jag försöker komma åt timestampz?
     .eq('slug', params.slug)
     .single()
 
@@ -15,7 +15,7 @@ export default async function PostPage({ params }:{ params: { slug: string }}) {
 
       console.log(data)
   return (
-    <Card className="py-4">
+    <Card className="py-4 border-2 border-white">
     <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
       <p className="text-tiny uppercase font-bold">{data.users?.username}</p>
       {/* <small className="text-default-500">{data.timestampz}</small> // fix timestamp */}
@@ -29,6 +29,7 @@ export default async function PostPage({ params }:{ params: { slug: string }}) {
         width={270}
       />
       <p>{data.content}</p>
+      <p>{data.timestampz}</p>
     </CardBody>
   </Card>
   )
