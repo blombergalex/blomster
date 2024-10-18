@@ -24,16 +24,17 @@ export const HomePosts = ({
     refetchOnWindowFocus: true,
   });
 
-  console.log({ posts });
   return (
-    <section className="flex flex-col gap-2 items-center w-full">
-      <h2 className="justify-self-start ">POSTS</h2>
-      {posts.map(({ id, title, slug, users }) => (
+    <section className="flex flex-col gap-2 w-full px-2">
+      <p className="text-tiny uppercase font-bold">hot</p>
+      {posts.map(({ id, title, slug, users, content, image }) => (
         <Post
           key={id}
-          author={users?.username || "anonymous"}
+          username={users?.username || 'anonymous'}
           title={title}
           slug={slug}
+          content={content}
+          image={image}
         />
       ))}
     </section>

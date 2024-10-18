@@ -33,9 +33,10 @@ const config: Config = {
             background: '#ffffff', // Light background
             foreground: '#000000', // Dark text
             primary: {
-              300: '#F4743B', // dark orange
               DEFAULT: '#FF8C00', // Default orange
-              // foreground: '#0A210F', // Dark green text color
+              foreground: '#ffffff',
+              300: '#F4743B', // dark orange
+              400: '#0A210F', // Dark green text color
             },
           },
         },

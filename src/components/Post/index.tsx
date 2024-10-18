@@ -1,33 +1,43 @@
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
-import Link from "next/link";
+import { Tables } from "@/app/utils/supabase/database.types";
 
-export const Post = ({
-  author,
-  title,
-  slug,
-}: {
-  author: string;
-  title: string;
-  slug: string;
-}) => {
+import Link from "next/link";
+import { useMemo } from "react";
+
+type postType = Pick<Tables<"posts">, "title" | "slug" | "image" | "content" > &
+  Pick<Tables<"users">, "username">;
+
+export const Post = ({ username, title, slug, content, image}: postType) => {
+  
+  const trimmedContent = useMemo(() => {
+    if (!content) return '';
+
+    const words = content.split(/\s+/).slice(0, 10)
+    return words.join(' ') + '...'
+  }, [content]);
+
   return (
     <Link
       href={`/post/${slug}`}
-      className="flex flex-col w-full rounded-sm bg-primary text-background p-2"
+      className="w-full rounded-sm text-background p-2"
     >
-      <Card className="py-4 border-2 border-white">
+      <Card className="flex w-full py-4 border-2 border-white bg-primary text-primary-foreground">
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-          <p className="text-tiny uppercase font-bold">@{author}</p>
-          {/* <small className="text-default-500">{data.timestampz}</small> // fix timestamp */}
+          <p className="text-tiny uppercase font-bold">@{username}</p>
           <h4 className="font-bold text-large">{title}</h4>
         </CardHeader>
         <CardBody className="overflow-visible py-2">
-          <Image
-            alt="Card background"
-            className="object-cover rounded-xl"
-            src="https://nextui.org/images/hero-card-complete.jpeg" // fix actual imagesrc
-            width={270}
-          />
+          {image ? (
+            <Image
+              alt="Card background"
+              className="object-cover rounded-xl"
+              src={image}
+              width={270}
+              height={"auto"} //correct syntax?
+            />
+          ) : (
+            <p>{trimmedContent}</p>
+          )}
         </CardBody>
       </Card>
     </Link>

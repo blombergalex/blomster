@@ -5,13 +5,13 @@ export const getHomePosts = () => {
   const supabase = createClient()
   return supabase
     .from('posts')
-    .select('id, title, slug, users("username")')
+    .select('id, title, slug, users("username"), image, content')
     .order('created_at', {ascending: false})
 }
 
 export type HomePostsType = QueryData<ReturnType<typeof getHomePosts>>
 
-export const getPostsByQuery = (query: string) => {
+export const getPostsByQuery = (query: string) => { // for search bar
   const supabase = createClient()
   return supabase 
     .from('posts')
