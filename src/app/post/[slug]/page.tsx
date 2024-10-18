@@ -36,9 +36,8 @@ export default async function PostPage({ params }:{ params: { slug: string }}) {
       }
     ).format(date)
 
-
   return (
-    <Card className="py-4 border-2 border-white shadow-none">
+    <Card className="py-4 border-b-1 border-foreground shadow-none rounded-none">
     <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
       <p className="text-tiny uppercase font-bold">{data.users?.username}</p>
       <h4 className="font-bold text-large">{data.title}</h4>

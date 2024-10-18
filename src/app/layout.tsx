@@ -16,14 +16,14 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className="text-primary bg-background">
-        <Providers>
-          <QueryClientProvider>
-            <Header />
-            <main>{children}</main>
-            <Footer />
-          </QueryClientProvider>
-        </Providers>
+      <body className="flex flex-col min-h-screen text-primary bg-background">
+          <Providers>
+            <QueryClientProvider>
+              <Header />
+              <main className="flex">{children}</main>
+              <Footer />
+            </QueryClientProvider>
+          </Providers>
       </body>
     </html>
   );
