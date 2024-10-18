@@ -7,19 +7,42 @@ export default async function PostPage({ params }:{ params: { slug: string }}) {
   const supabase = createClient()
   const {data, error} = await supabase
     .from('posts')
-    .select('title, content, users("username"), timestampz') //varför blir det error när jag försöker komma åt timestampz?
+    .select('title, content, users("username"), created_at') 
     .eq('slug', params.slug)
     .single()
 
     if (!data || error) notFound()
 
-      console.log(data)
+    const date = new Date(data.created_at)
+    
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: 'short',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      dateStyle: 'medium',
+      timeZoneName: 'shortGeneric',
+    }
+
+    const otherDate = new Intl.DateTimeFormat('sv-SE', 
+      {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        timeZoneName: 'shortGeneric',
+      }
+    ).format(date)
+
+
   return (
     <Card className="py-4 border-2 border-white">
     <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
       <p className="text-tiny uppercase font-bold">{data.users?.username}</p>
-      {/* <small className="text-default-500">{data.timestampz}</small> // fix timestamp */}
       <h4 className="font-bold text-large">{data.title}</h4>
+      <small className="text-default-500">{otherDate}</small>
     </CardHeader>
     <CardBody className="overflow-visible py-2">
       <Image
@@ -29,7 +52,6 @@ export default async function PostPage({ params }:{ params: { slug: string }}) {
         width={270}
       />
       <p>{data.content}</p>
-      <p>{data.timestampz}</p>
     </CardBody>
   </Card>
   )
