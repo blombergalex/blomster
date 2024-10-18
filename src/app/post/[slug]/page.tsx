@@ -37,13 +37,13 @@ export default async function PostPage({ params }:{ params: { slug: string }}) {
     ).format(date)
 
   return (
-    <Card className="py-4 border-b-1 border-foreground shadow-none rounded-none">
+    <Card className="py-4 border-b-1 border-foreground shadow-none rounded-none w-full ">
     <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
       <p className="text-tiny uppercase font-bold">{data.users?.username}</p>
       <h4 className="font-bold text-large">{data.title}</h4>
       <small className="text-default-500">{otherDate}</small>
     </CardHeader>
-    <CardBody className="overflow-visible py-2">
+    <CardBody className="overflow-visible py-4 items-center">
       <Image
         alt="Card background"
         className="object-cover rounded-xl"
