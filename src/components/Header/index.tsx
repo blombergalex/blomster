@@ -1,5 +1,6 @@
 import Link from "next/link"
 import Themeswitcher from "../ThemeSwitcher"
+import Navigation from "../Navigation"
 
 const Header = () => {
   return (
@@ -7,11 +8,12 @@ const Header = () => {
       <nav className="container flex items-center justify-between">
         <ul>
           <li>
-            <Link href='/'>Home</Link>
+          <Link href='/'>Home</Link>
           </li>
         </ul>
       </nav>
       <Themeswitcher />
+      <Navigation/>
     </header>
   )
 }
