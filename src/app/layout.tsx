@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import Providers from "./providers/theme-providers";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../components/Header/header";
+import Footer from "../components/Footer/footer";
 import { QueryClientProvider } from "./providers/query-client-provider";
 
 export const metadata: Metadata = {

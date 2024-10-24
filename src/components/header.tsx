@@ -1,6 +1,6 @@
 import Link from "next/link"
-import Themeswitcher from "../ThemeSwitcher"
-import Navigation from "../Navigation"
+import Themeswitcher from "./theme-switcher"
+import Navigation from "./navigation"
 
 const Header = () => {
   return (
