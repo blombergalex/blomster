@@ -18,7 +18,7 @@ const ThemeSwitcher = () => {
   return(
     <button 
       onClick={handleClick} 
-      className='flex items-center justify-center rounded-lg p-2 transition bg-gray-600'
+      className='flex items-center justify-center rounded-lg p-2 transition bg-gray-600 w-fit'
     >
       {resolvedTheme === 'dark' ? (
         <SunIcon className='size-5 transition text-black hover:text-white ' />

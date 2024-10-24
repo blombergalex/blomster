@@ -1,6 +1,7 @@
 import Link from "next/link"
-import Themeswitcher from "./theme-switcher"
+
 import Navigation from "./navigation"
+import ThemeSwitcher from "./theme-switcher"
 
 const Header = () => {
   return (
@@ -12,7 +13,7 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-      <Themeswitcher />
+      <ThemeSwitcher />
       <Navigation/>
     </header>
   )

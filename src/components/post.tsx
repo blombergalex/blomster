@@ -1,19 +1,18 @@
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
-import { Tables } from "@/app/utils/supabase/database.types";
+import { Tables } from "@/utils/supabase/database.types";
 
 import Link from "next/link";
 import { useMemo } from "react";
 
-type postType = Pick<Tables<"posts">, "title" | "slug" | "image" | "content" > &
+type postType = Pick<Tables<"posts">, "title" | "slug" | "image" | "content"> &
   Pick<Tables<"users">, "username">;
 
-export const Post = ({ username, title, slug, content, image}: postType) => {
-  
+export const Post = ({ username, title, slug, content, image }: postType) => {
   const trimmedContent = useMemo(() => {
-    if (!content) return '';
+    if (!content) return "";
 
-    const words = content.split(/\s+/).slice(0, 10)
-    return words.join(' ') + '...'
+    const words = content.split(/\s+/).slice(0, 10);
+    return words.join(" ") + "...";
   }, [content]);
 
   return (
