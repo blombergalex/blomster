@@ -1,4 +1,4 @@
-import { HomePosts } from "@/components/HomePosts";
+import { HomePosts } from "@/components/home-posts";
 import { getHomePosts } from "./utils/supabase/queries";
 
 export default async function Home() {

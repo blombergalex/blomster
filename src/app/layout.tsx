@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import Providers from "./providers/theme-providers";
-import Header from "../components/Header/header";
-import Footer from "../components/Footer/footer";
 import { QueryClientProvider } from "./providers/query-client-provider";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 
 export const metadata: Metadata = {
   title: "Blomster",
