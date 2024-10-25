@@ -4,7 +4,6 @@ import "./globals.css";
 import Providers from "@/providers/theme-providers";
 import { QueryClientProvider } from "@/providers/query-client-provider";
 import Footer from "@/components/footer";
-import Header from "@/components/header";
 
 export const metadata: Metadata = {
   title: "Blomster",
@@ -19,7 +18,7 @@ export default function RootLayout({
       <body className="flex flex-col min-h-screen text-primary bg-background">
           <Providers>
             <QueryClientProvider>
-              <main className="flex">{children}</main>
+              <main>{children}</main>
               <Footer />
             </QueryClientProvider>
           </Providers>

@@ -19,5 +19,4 @@ export const getPostsByQuery = (query: string) => { // for search bar
     .select('id, title, slug')
     .textSearch('title', query.replace(/ /g, '+')) //fixa så den söker med hela ord och inte bara träffen den får, använd I like!
                                                   // check supabase textsearch in documentation
-
 }

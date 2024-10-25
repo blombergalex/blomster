@@ -9,8 +9,8 @@ export default async function Home() {
   const { data, error } = await getHomePosts(supabase);
 
   return (
-    <div className="flex flex-grow items-center">
-      <main className="w-full">
+    <div className="flex flex-col flex-grow items-center">
+      <main className="w-full px-2">
         {error || data.length === 0 ? (
           <div>no posts found!</div>
         ) : (

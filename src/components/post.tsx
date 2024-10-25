@@ -25,7 +25,7 @@ export const Post = ({ username, title, slug, content, image }: postType) => {
           <p className="text-tiny uppercase font-bold">@{username}</p>
           <h4 className="font-bold text-large">{title}</h4>
         </CardHeader>
-        <CardBody className="overflow-visible py-2">
+        <CardBody className="overflow-visible py-2 px-4">
           {image ? (
             <Image
               alt="Card background"

@@ -13,8 +13,8 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-      <ThemeSwitcher />
-      <Navigation/>
+      {/* <ThemeSwitcher /> */}
+      {/* <Navigation/> */}
     </header>
   )
 }
