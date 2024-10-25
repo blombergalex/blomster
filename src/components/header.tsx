@@ -5,7 +5,7 @@ import ThemeSwitcher from "./theme-switcher"
 
 const Header = () => {
   return (
-    <header className="flex p-6 sticky top-0">
+    <header className="flex text-foreground p-6 sticky top-0">
       <nav className="container flex items-center justify-between">
         <ul>
           <li>

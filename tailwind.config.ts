@@ -46,7 +46,7 @@ const config: Config = {
             background: '#0D001A', // Dark background
             foreground: '#ffffff', // Light text
             primary: {
-              DEFAULT: '#ACECF7', // Light neon blue
+              DEFAULT: '#012711', // Dark green
               300: '49B6FF', //other blue
               foreground: '#ffffff', // Light text color
             },

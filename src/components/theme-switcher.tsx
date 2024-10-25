@@ -18,12 +18,12 @@ const ThemeSwitcher = () => {
   return(
     <button 
       onClick={handleClick} 
-      className='flex items-center justify-center rounded-lg p-2 transition bg-gray-600 w-fit'
+      className='flex items-center justify-center rounded-lg p-2 bg-transparent border-1 border-foreground w-fit'
     >
       {resolvedTheme === 'dark' ? (
-        <SunIcon className='size-5 transition text-black hover:text-white ' />
+        <SunIcon className='size-5' />
       ) : (
-        <MoonIcon className='size-5 transition hover:text-black'/>
+        <MoonIcon className='size-5 '/>
       )}
     </button>
   )
