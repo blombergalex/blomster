@@ -2,14 +2,9 @@
 
 import { useTheme } from 'next-themes'
 import { SunIcon, MoonIcon } from '@heroicons/react/16/solid'
-import { useState, useEffect } from 'react';
 
 const ThemeSwitcher = () => {
   const {resolvedTheme, setTheme} = useTheme();
-
-  const [mounted, SetMounted] = useState<boolean>(false);
-  useEffect(() => SetMounted(true)
-, [])
 
   const handleClick = () =>{
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
