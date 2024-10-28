@@ -1,20 +1,19 @@
 'use server'
 
-import { z } from 'zod';
 import { redirect } from 'next/navigation'
 
 import { createClient } from '@/utils/supabase/server'
-import { logInSchema } from './schemas'
 
-export const logIn = async (data: z.infer<typeof logInSchema>) => {
+export const logIn = async (formData: FormData) => {
   const supabase = createClient()
 
-  const parsedData = logInSchema.parse(data)
-
-  const { error } = await supabase.auth.signInWithPassword(parsedData)
-  if (error) {
-    throw error
+  const data = {
+    email: formData.get('email') as string,
+    password: formData.get('password') as string
   }
+
+  await supabase.auth.signInWithPassword(data)
 
   redirect('/')
 }
+

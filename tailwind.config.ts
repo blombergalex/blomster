@@ -49,7 +49,7 @@ const config: Config = {
             foreground: '#ffffff', // Light text
             primary: {
               DEFAULT: '#012711', // Dark green
-              300: '49B6FF', //other blue
+              300: '#49B6FF', //other blue
               foreground: '#ffffff', // Light text color
             },
           },

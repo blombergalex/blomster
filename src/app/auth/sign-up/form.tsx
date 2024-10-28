@@ -15,8 +15,8 @@ export const SignUpForm = () => {
   }
 
   return (
-    <form action={signUp} onKeyDown={handleKeyDown} className="flex w-full max-w-md flex-col gap-4">
-      <div className="flex w-full flex-wrap md:flex-nowrap gap-4 items-center">
+    <form action={signUp} onKeyDown={handleKeyDown} className="flex w-full flex-col gap-4">
+      <div className="flex flex-col gap-4 items-center mx-4">
         <Input type="email" label="Email" name="email" required /> 
         <Input label="Username" required/>
         <Input type="password" label="Password" name="password" required />

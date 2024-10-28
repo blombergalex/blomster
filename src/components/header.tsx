@@ -12,7 +12,7 @@ const Header = async () => {
   } = await supabase.auth.getUser();
 
   return (
-    <header className="flex text-foreground p-6 sticky top-0 border-b-2 border-t-gray-300">
+    <header className="flex text-foreground p-6 sticky top-0 border-b-2 border-t-gray-300 gap-1">
       <nav className="container flex items-center justify-between">
         <ul>
           <li>
@@ -22,7 +22,12 @@ const Header = async () => {
       </nav>
       {/* <Navigation/> */}
       {user ? (
-        <LogOutButton />
+        <>
+          <LogOutButton />
+          <Link href={"/create"}>
+            <Button>Create post</Button>
+          </Link>
+        </>
       ) : (
         <Link href={"/auth/log-in"}>
           <Button>Log in</Button>
