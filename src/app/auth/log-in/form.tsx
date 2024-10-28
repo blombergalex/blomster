@@ -12,7 +12,7 @@ export const LogInForm = () => {
       className="flex w-full max-w-md flex-col gap-4"
     >
       <div className="flex flex-col gap-4 items-center mx-4">
-        <Input type="email" name="email" label="Email" /> {/* or use username? */}
+        <Input type="email" name="email" label="Email" />
         <Input type="password" name="password" label="Password" />
         <Button type="submit" size="sm">
           Log in

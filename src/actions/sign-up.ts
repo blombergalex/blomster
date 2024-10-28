@@ -2,6 +2,7 @@
 
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
+import { logInSchema } from './schemas'
 
 // så next ser att det är server actions
 
@@ -13,10 +14,13 @@ export const signUp = async (formData: FormData) => {
   }
 
   const supabase = createClient()
+
+  const parsedData = logInSchema.parse(data)
+
   const {
     data: { user },
     error,
-  } = await supabase.auth.signUp(data)
+  } = await supabase.auth.signUp(parsedData)
 
   console.log({user, error})
 
