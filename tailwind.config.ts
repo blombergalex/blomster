@@ -32,11 +32,13 @@ const config: Config = {
           colors: {
             background: '#ffffff', // Light background
             foreground: '#000000', // Dark text
+             // grey
             primary: {
               DEFAULT: '#FF8C00', // Default orange
               foreground: '#ffffff',
               300: '#F4743B', // dark orange
               400: '#0A210F', // Dark green text color
+              500: '#3E3C3C', // grey
             },
           },
         },

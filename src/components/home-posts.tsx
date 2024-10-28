@@ -28,7 +28,7 @@ export const HomePosts = ({
 
   return (
     <section className="flex flex-col gap-2 w-full px-2">
-      <p className="text-tiny text-foreground uppercase font-bold">hot</p>
+      <p className="text-tiny text-foreground uppercase font-bold px-2">hot topics</p>
       {posts.map(({ id, title, slug, users, content, image }) => (
         <Post
           key={id}

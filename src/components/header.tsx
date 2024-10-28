@@ -1,22 +1,35 @@
-import Link from "next/link"
+import Link from "next/link";
+import { createClient } from "@/utils/supabase/server";
 
-import Navigation from "./navigation"
-import ThemeSwitcher from "./theme-switcher"
+import LogOutButton from "./logout-button";
+import Navigation from "./navigation";
+import { Button } from "@nextui-org/react";
 
-const Header = () => {
+const Header = async () => {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
-    <header className="flex text-foreground p-6 sticky top-0">
+    <header className="flex text-foreground p-6 sticky top-0 border-b-2 border-t-gray-300">
       <nav className="container flex items-center justify-between">
         <ul>
           <li>
-          <Link href='/'>Home</Link>
+            <Link href="/">Home</Link>
           </li>
         </ul>
       </nav>
-      {/* <ThemeSwitcher /> */}
       {/* <Navigation/> */}
+      {user ? (
+        <LogOutButton />
+      ) : (
+        <Link href={"/auth/log-in"}>
+          <Button>Log in</Button>
+        </Link>
+      )}
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

@@ -6,14 +6,13 @@ const Footer = () => {
 
   return (
     <div
-      data-testid="footer"
-      className="flex flex-col justify-center p-4 bg-background text-foreground"
+      className="flex flex-col justify-center p-4 bg-background text-foreground pt-10"
     >
-      <div className="my-10 md:mx-10">
+      <div className="md:mx-10 border-t-2 border-t-gray-300 ">
         <div className="flex flex-col space-y-4 text-sm md:text-lg">
           <a
             href="mailto:blombergalexandras@gmail.com"
-            className="flex items-center space-x-2 cursor-pointer"
+            className="flex items-center space-x-2 cursor-pointer w-fit"
           >
             <EnvelopeIcon className="w-6 h-6" />
             <span>blombergalexandras@gmail.com</span>
@@ -22,7 +21,7 @@ const Footer = () => {
             href="https://linkedin.com/in/alexandra-blomberg-7231a616a"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center space-x-2 cursor-pointer"
+            className="flex items-center space-x-2 cursor-pointer w-fit"
           >
             <UserPlusIcon className="w-6 h-6" />
             <span>LinkedIn</span>
@@ -31,8 +30,7 @@ const Footer = () => {
         </div>
       </div>
       <p
-        data-testid="bottom-text"
-        className="text-center pt-14 border-t-2 border-t-gray-300 font-SansNarrow md:text-lg"
+        className="text-center pt-14 font-SansNarrow md:text-lg"
       >
         Alexandra Blomberg &copy; {currentDate} | &nbsp;
         <a

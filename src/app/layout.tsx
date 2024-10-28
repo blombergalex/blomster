@@ -19,7 +19,7 @@ export default function RootLayout({
           <Providers>
             <QueryClientProvider>
               <main>{children}</main>
-              <Footer />
+              {/* <Footer /> */}
             </QueryClientProvider>
           </Providers>
       </body>
