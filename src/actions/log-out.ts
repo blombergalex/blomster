@@ -7,5 +7,5 @@ export const logOut = () => {
   const supabase = createClient()
   supabase.auth.signOut()
 
-  redirect('/')
+  redirect('/auth/log-in')
 }

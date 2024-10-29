@@ -13,6 +13,10 @@ export default function LogInPage() {
         <Link href='/auth/sign-up'>
           Don&apos;t have an account? Sign up
         </Link>
+        <p className='text-primary-500 text-center'>or</p>
+        <div className='text-center'>
+          <Link href='/'>Continue as guest</Link>
+        </div>
       </div>
     </main>
   )
