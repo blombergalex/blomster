@@ -9,7 +9,7 @@ export default function LogInPage() {
         <h1 className='text-2xl font-bold'>Welcome back</h1>
         <LogInForm />
       </div>
-      <div className='text-primary-500 mt-6'>
+      <div className='text-primary-500 mt-6 text-small'>
         <Link href='/auth/sign-up'>
           Don&apos;t have an account? Sign up
         </Link>

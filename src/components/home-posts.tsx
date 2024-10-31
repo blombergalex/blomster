@@ -27,7 +27,7 @@ export const HomePosts = ({
   });
 
   return (
-    <section className="flex flex-col gap-2 w-full px-2">
+    <section className="flex flex-col gap-2 w-full px-2 items-center">
       <p className="text-tiny text-foreground uppercase font-bold px-2">hot topics</p>
       {posts.map(({ id, title, slug, users, content, image }) => (
         <Post

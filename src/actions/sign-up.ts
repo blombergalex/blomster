@@ -4,8 +4,6 @@ import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 import { signUpSchema } from './schemas'
 
-// så next ser att det är server actions
-
 export const signUp = async (formData: FormData) => {
   const data = {
     email: formData.get('email') as string,
@@ -30,8 +28,9 @@ export const signUp = async (formData: FormData) => {
 
   if (user && user.email) { //om vi lyckades skapa en användare
     await supabase.from('users').insert([
-      {id: user.id, email: user.email, username: data.username}
+      {id: user.id, email: user.email, username: data.username} //keep username, to insert it to the user profile!
     ])
+
     console.log('new user:', {data, error})
   } else {
     console.log('user not registered', {error})

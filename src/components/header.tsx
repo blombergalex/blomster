@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import LogOutButton from "./logout-button";
 import Navigation from "./navigation";
 import { Button } from "@nextui-org/react";
+import { buttonClasses } from "@/utils/classes";
 
 const Header = async () => {
   const supabase = createClient();
@@ -25,12 +26,12 @@ const Header = async () => {
         <>
           <LogOutButton />
           <Link href={"/create"}>
-            <Button>Create post</Button>
+            <Button className={buttonClasses}>Create post</Button>
           </Link>
         </>
       ) : (
         <Link href={"/auth/log-in"}>
-          <Button>Log in</Button>
+          <Button className={buttonClasses}>Log in</Button>
         </Link>
       )}
     </header>

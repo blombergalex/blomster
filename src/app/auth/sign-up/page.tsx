@@ -9,7 +9,7 @@ export default function LogInPage() {
         <h1 className='text-2xl font-bold'>Welcome to Blomster</h1>
         <SignUpForm />
       </div>
-      <Link href='/auth/log-in' className='text-primary-500'>
+      <Link href='/auth/log-in' className='text-primary-500 text-small'>
         Already have an account? Log in
       </Link>
     </main>

@@ -5,7 +5,7 @@ import { logOut } from '@/actions/log-out'
 
 const LogOutButton = () => {
   return (
-    <Button onClick={() => logOut()}>Log out</Button>
+    <Button className='border-1 border-primary' onClick={() => logOut()}>Log out</Button>
   )
 }
 
