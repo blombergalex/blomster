@@ -1,17 +1,18 @@
 'use server'
 
-import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
+
+import { createClient } from '@/utils/supabase/server'
 import { signUpSchema } from './schemas'
 
 export const signUp = async (formData: FormData) => {
+  const supabase = createClient()
+
   const data = {
     email: formData.get('email') as string,
     username: formData.get('username') as string,
     password: formData.get('password') as string,
   }
-
-  const supabase = createClient()
 
   const parsedData = signUpSchema.parse(data)
 
