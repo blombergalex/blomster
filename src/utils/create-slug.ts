@@ -11,8 +11,6 @@ const slugify = (text: string) => {
   .replace(/^-+|-+$/g, "")        // Trim hyphens at start/end
 }
 
-export const createSlug = (parsedData: { title: string }) => {
-  return `${slugify(parsedData.title).slice(0, 50)}-${randomUUID()}`;
+export const createSlug = (parsedData: { title: string}, username: string) => {
+  return `${username}/${slugify(parsedData.title).slice(0, 50)}-${randomUUID()}`;
 };
-
-// also include username

@@ -18,12 +18,22 @@ export const createPost = async (data: z.infer<typeof createPostSchema>) => {
     throw new Error('User not authenticated')
   }
 
-  // const username = data.user.username // to work username must be column of user, then pass username to createSlug together with parsedData
+  const { data: profile, error: profileError } = await supabase
+    .from('users')
+    .select('username')
+    .eq('id', user.id)
+    .single()
 
+  if (profileError || !profile) {
+    throw new Error('User profile not found')
+  }
+
+  const slug = createSlug(parsedData, profile.username )
+  
   const { error } = await supabase
-    .from('posts')
-    .insert([{ ...parsedData, user_id: user.id, slug:createSlug(parsedData) }]) // in the slugify function, I can also use a uuid
-    .throwOnError()
+  .from('posts')
+  .insert([{ ...parsedData, user_id: user.id, slug }])
+  .throwOnError()
 
     revalidatePath('/')
     redirect('/')
