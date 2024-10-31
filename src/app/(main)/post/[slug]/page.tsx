@@ -52,9 +52,9 @@ export default async function PostPage({
         <h4 className="font-bold text-large">{post.title}</h4>
         <small className="text-default-500">{otherDate}</small>
       </CardHeader>
-      {/* {isAuthor && ( */}
+      {isAuthor && (
         <DeletePostButton postId={post.id}/>
-      {/* )} */}
+      )}
       <CardBody className="overflow-visible py-4">
         <Image
           alt="Card background"
