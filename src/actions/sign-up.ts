@@ -17,10 +17,8 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
   } = await supabase.auth.signUp(parsedData)
 
   if ( error ) {
-    throw error  //varför kastas inte felet?
+    throw error  
   }
-
-  // console.log({user, error})
 
   if (user && user.email) {
     await supabase.from('users').insert([

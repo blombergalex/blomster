@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Toaster } from "sonner";
 
 import "./globals.css";
 import Providers from "@/providers/theme-providers";
@@ -16,12 +17,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen text-primary bg-background">
-          <Providers>
-            <QueryClientProvider>
-              <main>{children}</main>
-              {/* <Footer /> */}
-            </QueryClientProvider>
-          </Providers>
+        <Providers>
+          <QueryClientProvider>
+            <main>
+              {children}
+              <Toaster />
+            </main>
+            {/* <Footer /> */}
+          </QueryClientProvider>
+        </Providers>
       </body>
     </html>
   );

@@ -3,17 +3,22 @@
 import { logIn } from "@/actions/log-in";
 import { logInSchema } from "@/actions/schemas";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Input } from "@nextui-org/react";
+import { toast } from "sonner";
+import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import { errorClasses, buttonClasses, inputClasses } from "@/utils/classes";
 
 export const LogInForm = () => {
   const { mutate, error, isPending } = useMutation({
     mutationFn: logIn,
-    onError: (error) => console.log(error.message),
+    onError: (error) => toast.error(error.message),
+    onSuccess: (_, variables) => {
+      toast.success(`Logged in as ${variables.email}`);
+    }
   });
 
   const {

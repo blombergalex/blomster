@@ -1,19 +1,21 @@
 "use client";
 
 import { Button, Input } from "@nextui-org/react";
+import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation } from "@tanstack/react-query";
 
-import { logInSchema, signUpSchema } from "@/actions/schemas";
+import { signUpSchema } from "@/actions/schemas";
 import { signUp } from "@/actions/sign-up";
-import { buttonClasses, inputClasses } from "@/utils/classes";
+import { buttonClasses, errorClasses, inputClasses } from "@/utils/classes";
 
 export const SignUpForm = () => {
   const { mutate, error, isPending } = useMutation({
     mutationFn: signUp,
-    onError: (error) => console.log(error.message),
+    onError: (error) => toast.error(error.message),
+    onSuccess: () => toast.success('Account created successfully')
   })
   
   const { 
@@ -38,7 +40,7 @@ export const SignUpForm = () => {
             name="email"
             required
           />
-          {/* {errror && } */}
+          {errors.email && <span className={errorClasses}>{errors.email.message}</span>}
         </div>
         <div className="w-2/3">
           <Input
@@ -47,7 +49,7 @@ export const SignUpForm = () => {
             label="Username"
             required
           />
-          {/* {errror && } */}
+          {errors.username && <span className={errorClasses}>{errors.username.message}</span>}
         </div>
         <div className="w-2/3">
           <Input
@@ -57,10 +59,10 @@ export const SignUpForm = () => {
             label="Password"
             required
           />
-          {/* {errror && } */}
+          {errors.password && <span className={errorClasses}>{errors.password.message}</span>}
         </div>
         <Button className={buttonClasses} type="submit" size="sm">
-          Sign up
+          {isPending ? 'Creating...' : 'Sign up'}
         </Button>
       </div>
     </form>
