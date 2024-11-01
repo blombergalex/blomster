@@ -1,18 +1,13 @@
 'use server'
 
 import { redirect } from 'next/navigation'
+import { z } from 'zod'
 
 import { createClient } from '@/utils/supabase/server'
 import { signUpSchema } from './schemas'
 
-export const signUp = async (formData: FormData) => {
+export const signUp = async (data: z.infer<typeof signUpSchema>) => {
   const supabase = createClient()
-
-  const data = {
-    email: formData.get('email') as string,
-    username: formData.get('username') as string,
-    password: formData.get('password') as string,
-  }
 
   const parsedData = signUpSchema.parse(data)
 
@@ -22,14 +17,14 @@ export const signUp = async (formData: FormData) => {
   } = await supabase.auth.signUp(parsedData)
 
   if ( error ) {
-    throw error
+    throw error  //varför kastas inte felet?
   }
 
-  console.log({user, error})
+  // console.log({user, error})
 
-  if (user && user.email) { //om vi lyckades skapa en användare
+  if (user && user.email) {
     await supabase.from('users').insert([
-      {id: user.id, email: user.email, username: data.username} //keep username, to insert it to the user profile!
+      {id: user.id, email: user.email, username: data.username}
     ])
 
     console.log('new user:', {data, error})

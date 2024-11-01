@@ -1,22 +1,32 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Input } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useMutation } from "@tanstack/react-query";
 
-import { signUpSchema } from "@/actions/schemas";
+import { logInSchema, signUpSchema } from "@/actions/schemas";
 import { signUp } from "@/actions/sign-up";
 import { buttonClasses, inputClasses } from "@/utils/classes";
 
 export const SignUpForm = () => {
-  const { register, handleSubmit } = useForm({
+  const { mutate, error, isPending } = useMutation({
+    mutationFn: signUp,
+    onError: (error) => console.log(error.message),
+  })
+  
+  const { 
+    register, 
+    handleSubmit, 
+    formState: { errors },
+  } = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
   });
 
   return (
     <form
-      // onSubmit={handleSubmit((values) => mutate(values))}
-      action={signUp}
+      onSubmit={handleSubmit((values) => mutate(values))}
       className="flex w-full flex-col max-w-md gap-4"
     >
       <div className="flex flex-col gap-4 items-center mx-4">
