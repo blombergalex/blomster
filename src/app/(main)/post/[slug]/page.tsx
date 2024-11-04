@@ -46,15 +46,17 @@ export default async function PostPage({
   }).format(date);
 
   return (
-    <Card className="py-4 border-b-1 border-foreground shadow-none rounded-none w-full ">
-      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-        <p className="text-tiny uppercase font-bold">{post.users?.username}</p>
-        <h4 className="font-bold text-large">{post.title}</h4>
-        <small className="text-default-500">{otherDate}</small>
-      </CardHeader>
+    <Card className="py-4 shadow-none rounded-none w-full ">
+      <CardHeader className="pb-0 pt-2 px-4 justify-between">
+        <div>
+          <p className="text-tiny uppercase font-bold">{post.users?.username}</p>
+          <h4 className="font-bold text-large">{post.title}</h4>
+          <small className="text-default-500">{otherDate}</small>
+        </div>
       {isAuthor && (
         <DeletePostButton postId={post.id}/>
       )}
+      </CardHeader>
       <CardBody className="overflow-visible py-4">
         <Image
           alt="Card background"
