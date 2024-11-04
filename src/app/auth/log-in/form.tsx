@@ -59,7 +59,6 @@ export const LogInForm = () => {
         <Button className={buttonClasses} type="submit" size="sm">
           {isPending ? "Logging in..." : "Log in"}
         </Button>
-        {error && <span className={errorClasses}>{error.message}</span>}
       </div>
     </form>
   );

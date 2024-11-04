@@ -2,3 +2,4 @@ export const inputClasses = "border-2 border-primary rounded-xl outline-none bg-
 export const errorClasses = "text-sm text-primary-300 self-start";
 export const buttonClasses = "bg-primary";
 export const secondaryButtonClasses = "border-2 border-primary w-fit bg-transparent"
+export const logOutButtonClasses = "border-2 border-primary w-fit bg-transparent self-center"
