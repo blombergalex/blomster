@@ -29,9 +29,9 @@ export const middleware = async (request: NextRequest) => {
 
   const {
     data: { user },
-  } = await supabase.auth.getUser() // refreshar user session = användaren uppdateras och vi ser om den är inloggad eller inte
+  } = await supabase.auth.getUser()
 
-  if (!user && protectedRoutes.includes(request.nextUrl.pathname)) {
+  if (!user && protectedRoutes.some((route) => route.test(request.nextUrl.pathname))) {
     const url = request.nextUrl.clone()
     url.pathname = '/auth/log-in'
     return NextResponse.redirect(url)
@@ -41,7 +41,10 @@ export const middleware = async (request: NextRequest) => {
 }
 
 // array of protected routes
-const protectedRoutes = ['/create']
+const protectedRoutes = [
+  /^\/create$/,
+  /^\/post\/[^\/]+\/edit$/
+]
 
 
 // the middleware is active right before a component is rendered

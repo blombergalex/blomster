@@ -46,7 +46,7 @@ const Header = async () => {
             <Button className={buttonClasses}>Create post</Button>
           </Link>
           <div className="mx-2">
-            <h3 className="text-medium uppercase font-semibold text-primary">{username}</h3>
+            <h3 className="text-small uppercase font-semibold text-primary">{username}</h3>
             <SolidUserCircleIcon className="text-primary" />
           </div>
         </>
