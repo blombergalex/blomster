@@ -9,14 +9,14 @@ export default async function Home() {
   const { data: posts, error } = await getHomePosts(supabase);
 
   return (
-      <main className="w-full mt-4 px-2 flex flex-col flex-grow items-center">
+      <main className="w-full my-4 px-2 flex flex-col flex-grow items-center">
         {error || posts.length === 0 ? (
           <div>no posts found!</div>
         ) : (
           <section className="flex flex-col gap-2 w-full px-2 items-center">
-            <p className="text-tiny text-foreground uppercase font-bold px-2">
+            <h1 className="text-tiny text-foreground uppercase font-bold px-2">
               hot topics
-            </p>
+            </h1>
             {posts.map(({ id, title, slug, users, content, image }) => (
               <Post
                 key={id}

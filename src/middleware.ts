@@ -40,7 +40,6 @@ export const middleware = async (request: NextRequest) => {
   return supabaseResponse
 }
 
-// array of protected routes
 const protectedRoutes = [
   /^\/create$/,
   /^\/post\/[^\/]+\/edit$/
