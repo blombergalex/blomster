@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { errorClasses, buttonClasses, inputClasses } from "@/utils/classes";
 
 export const LogInForm = () => {
-  const { mutate, error, isPending } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: logIn,
     onError: (error) => toast.error(error.message),
     onSuccess: (_, variables) => {
