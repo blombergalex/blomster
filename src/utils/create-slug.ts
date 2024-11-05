@@ -12,5 +12,5 @@ const slugify = (text: string) => {
 }
 
 export const createSlug = (parsedData: { title: string}, username: string) => {
-  return `${username}/${slugify(parsedData.title).slice(0, 50)}-${randomUUID()}`;
+  return `${username}-${slugify(parsedData.title).slice(0, 50)}-${randomUUID()}`;
 };

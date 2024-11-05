@@ -12,7 +12,7 @@ import { signUp } from "@/actions/sign-up";
 import { buttonClasses, errorClasses, inputClasses } from "@/utils/classes";
 
 export const SignUpForm = () => {
-  const { mutate, error, isPending } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: signUp,
     onError: (error) => toast.error(error.message),
     onSuccess: () => toast.success('Account created successfully')
@@ -25,6 +25,8 @@ export const SignUpForm = () => {
   } = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
   });
+
+  // add check against registered usernames 
 
   return (
     <form

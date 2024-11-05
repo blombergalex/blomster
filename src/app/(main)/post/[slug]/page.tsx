@@ -26,14 +26,14 @@ export default async function PostPage({
 
   const date = new Date(post.created_at);
 
-  const options: Intl.DateTimeFormatOptions = {
-    weekday: "short",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    dateStyle: "medium",
-    timeZoneName: "shortGeneric",
-  };
+  // const options: Intl.DateTimeFormatOptions = {
+  //   weekday: "short",
+  //   day: "numeric",
+  //   month: "long",
+  //   year: "numeric",
+  //   dateStyle: "medium",
+  //   timeZoneName: "shortGeneric",
+  // };
 
   const otherDate = new Intl.DateTimeFormat("sv-SE", {
     weekday: "short",

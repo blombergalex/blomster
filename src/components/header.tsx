@@ -19,7 +19,7 @@ const Header = async () => {
     const {data, error} = await supabase.from('users').select('id, username').eq('id', user.id)
     
     if (error) {
-      console.log('Error getting user info', error)
+      throw error
     }
     
     if (data && data.length > 0) {

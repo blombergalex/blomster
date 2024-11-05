@@ -12,8 +12,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { buttonClasses, errorClasses } from "@/utils/classes";
 
-export default function createPage() {
-  const { mutate, error, isPending } = useMutation({
+export default function CreatePage() {
+  const { mutate, isPending } = useMutation({
     mutationFn: createPost,
     onError: (error) => toast.error(error.message)
   })
@@ -35,9 +35,9 @@ export default function createPage() {
         onSubmit={handleSubmit((values) => mutate(values))}
         className='flex w-full flex-col gap-4 md:w-2/3'
       >
-        <Input {...register('title')} label='Title' name='Title' />
+        <Input {...register('title')} label='Title' />
         {errors.title && <span className={errorClasses}>{errors.title.message}</span>}
-        <Textarea {...register('content')} label='Your content here...' name='Content' />
+        <Textarea {...register('content')} label='Your content here...' />
         {errors.content && <span className={errorClasses}>{errors.content.message}</span>}
         <Button className={`${buttonClasses} self-end`} type="submit">
           {isPending ? 'Uploading post...' : 'Post'}

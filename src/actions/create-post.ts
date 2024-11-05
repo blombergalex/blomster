@@ -30,7 +30,7 @@ export const createPost = async (data: z.infer<typeof postSchema>) => {
 
   const slug = createSlug(parsedData, profile.username);
 
-  const { error } = await supabase
+  const { } = await supabase
     .from("posts")
     .insert([{ ...parsedData, user_id: user.id, slug }])
     .throwOnError();

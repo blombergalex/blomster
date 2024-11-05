@@ -24,10 +24,6 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
     await supabase.from('users').insert([
       {id: user.id, email: user.email, username: data.username}
     ])
-
-    console.log('new user:', {data, error})
-  } else {
-    console.log('user not registered', {error})
   }
 
   redirect('/')
