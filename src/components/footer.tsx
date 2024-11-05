@@ -9,7 +9,7 @@ const Footer = () => {
       className="flex flex-col justify-center p-4 bg-background text-foreground pt-10"
     >
       <div className="md:mx-10 border-t-2 border-t-gray-300 ">
-        <div className="flex flex-col space-y-4 text-sm md:text-lg">
+        <div className="flex flex-col space-y-4 mt-6">
           <a
             href="mailto:blombergalexandras@gmail.com"
             className="flex items-center space-x-2 cursor-pointer w-fit"
@@ -30,17 +30,16 @@ const Footer = () => {
         </div>
       </div>
       <p
-        className="text-center pt-14 font-SansNarrow md:text-lg"
+        className="text-center pt-14 font-SansNarrow"
       >
         Alexandra Blomberg &copy; {currentDate} | &nbsp;
         <a
           href="https://github.com/blombergalex/alex-bloom"
           target="_blank"
           rel="noopener noreferrer"
-          className="cursor-pointer"
         >
           Source code
-        </a>
+          </a>
       </p>
     </div>
   );

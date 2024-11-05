@@ -23,7 +23,7 @@ export default function RootLayout({
               {children}
               <Toaster />
             </main>
-            {/* <Footer /> */}
+            <Footer />
           </QueryClientProvider>
         </Providers>
       </body>

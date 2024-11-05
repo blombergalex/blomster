@@ -3,7 +3,6 @@ import { createClient } from "@/utils/supabase/server";
 import { UserCircleIcon as SolidUserCircleIcon} from "@heroicons/react/16/solid";
 
 import LogOutButton from "./logout-button";
-import Navigation from "./navigation";
 import { Button } from "@nextui-org/react";
 import { buttonClasses } from "@/utils/classes";
 
@@ -30,7 +29,7 @@ const Header = async () => {
   }
 
   return (
-    <header className="flex text-foreground p-6 sticky top-0 border-b-2 border-t-gray-300 gap-1">
+    <header className="flex text-foreground p-2 sticky top-0 border-b-2 bg-background border-t-gray-300 gap-1 z-10 md:p-6">
       <nav className="container flex items-center justify-between">
         <ul>
           <li>
@@ -38,16 +37,15 @@ const Header = async () => {
           </li>
         </ul>
       </nav>
-      {/* <Navigation/> */}
       {user ? (
         <>
           <LogOutButton />
           <Link href={"/create"} className="self-center">
-            <Button className={buttonClasses}>Create post</Button>
+            <Button className={`${buttonClasses} dark:border-1`}>Create post</Button>
           </Link>
           <div className="mx-2">
-            <h3 className="text-small uppercase font-semibold text-primary">{username}</h3>
-            <SolidUserCircleIcon className="text-primary" />
+            <h3 className="text-small uppercase font-semibold text-primary dark:text-foreground">{username}</h3>
+            <SolidUserCircleIcon className="text-primary dark:text-foreground" />
           </div>
         </>
       ) : (
