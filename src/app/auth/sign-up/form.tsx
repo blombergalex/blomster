@@ -26,8 +26,6 @@ export const SignUpForm = () => {
     resolver: zodResolver(signUpSchema),
   });
 
-  // add check against registered usernames 
-
   return (
     <form
       onSubmit={handleSubmit((values) => mutate(values))}
