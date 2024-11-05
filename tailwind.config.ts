@@ -30,9 +30,9 @@ const config: Config = {
         light: {
           layout: {},
           colors: {
+            focus: '#000000',
             background: '#ffffff', // Light background
             foreground: '#000000', // Dark text
-             // grey
             primary: {
               DEFAULT: '#FF8C00', // Default orange
               foreground: '#ffffff',
@@ -45,6 +45,7 @@ const config: Config = {
         dark: {
           layout: {},
           colors: {
+            focus: '#D3D3D3',
             background: '#0D001A', // Dark background
             foreground: '#ffffff', // Light text
             primary: {
