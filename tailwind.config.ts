@@ -14,7 +14,7 @@ const config: Config = {
       colors: {
         neon: {
           green: '#39FF14', // Bright neon green
-          pink: '#FF6EC7',  // Neon pink (still in light theme if needed)
+          pink: '#FF6EC7',  // Neon pink 
           blue: '#00FFFF',  // Neon cyan
           yellow: '#F5EA00', // Neon yellow
           orange: '#FF4F00', // Neon orange (for dark theme)
@@ -36,7 +36,7 @@ const config: Config = {
             primary: {
               DEFAULT: '#FF8C00', // Default orange
               foreground: '#ffffff',
-              300: '#F4743B', // dark orange
+              300: '#F4743B', // Dark orange
               400: '#0A210F', // Dark green text color
               500: '#3E3C3C', // grey
             },
@@ -51,7 +51,7 @@ const config: Config = {
             primary: {
               DEFAULT: '#FF8C00', // Default orange
               foreground: '#ffffff',
-              300: '#49B6FF', //other blue
+              300: '#F4743B', // Dark orange
               500: '#D3D3D3', // Light text color
             },
           },
