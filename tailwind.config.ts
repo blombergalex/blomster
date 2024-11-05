@@ -48,9 +48,10 @@ const config: Config = {
             background: '#0D001A', // Dark background
             foreground: '#ffffff', // Light text
             primary: {
-              DEFAULT: '#3E3C3C', // Dark green
+              DEFAULT: '#FF8C00', // Default orange
+              foreground: '#ffffff',
               300: '#49B6FF', //other blue
-              foreground: '#ffffff', // Light text color
+              500: '#D3D3D3', // Light text color
             },
           },
         },

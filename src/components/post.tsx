@@ -21,7 +21,7 @@ export const Post = ({ username, title, slug, content, image }: postType) => {
       className="w-full rounded-sm text-background p-2 md:w-2/3"
     >
       <Card className="flex w-full py-4 border-2 border-white bg-primary text-primary-foreground">
-        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start z-0">
           <p className="text-tiny uppercase font-bold">@{username}</p>
           <h4 className="font-bold text-large">{title}</h4>
         </CardHeader>
