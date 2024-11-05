@@ -48,23 +48,10 @@ const config: Config = {
             background: '#0D001A', // Dark background
             foreground: '#ffffff', // Light text
             primary: {
-              DEFAULT: '#012711', // Dark green
+              DEFAULT: '#3E3C3C', // Dark green
               300: '#49B6FF', //other blue
               foreground: '#ffffff', // Light text color
             },
-          },
-        },
-        modern: {
-          extend: 'dark',
-          colors: {
-            background: '#0D001A', // Dark background for modern theme
-            foreground: '#000000', // dark text color
-            primary: {
-              DEFAULT: '#000000', // Default neon orange (bright)
-              300: '#E1E289', // yellow 
-              foreground: '#ffffff', // Light text color
-            },
-            focus: '#FF8C00', // Darker neon orange
           },
         },
       },

@@ -7,7 +7,7 @@ const ThemeSwitcher = () => {
   const {resolvedTheme, setTheme} = useTheme();
 
   const handleClick = () =>{
-    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+    setTheme(resolvedTheme === 'light' ? 'dark' : 'light')
   }
 
   return(
@@ -15,10 +15,10 @@ const ThemeSwitcher = () => {
       onClick={handleClick} 
       className='flex items-center justify-center rounded-lg p-2 bg-transparent border-1 border-foreground w-fit'
     >
-      {resolvedTheme === 'dark' ? (
-        <SunIcon className='size-5' />
-      ) : (
+      {resolvedTheme === 'light' ? (
         <MoonIcon className='size-5 '/>
+      ) : (
+        <SunIcon className='size-5' />
       )}
     </button>
   )
