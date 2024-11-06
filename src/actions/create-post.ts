@@ -25,7 +25,7 @@ export const createPost = async (data: z.infer<typeof postSchema>) => {
     .single();
 
   if (profileError || !profile) {
-    throw new Error("User profile not found");
+    throw new Error("User profile not found, must be logged in as valid user to post");
   }
 
   const slug = createSlug(parsedData, profile.username);
