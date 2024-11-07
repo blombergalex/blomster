@@ -9,9 +9,12 @@ export default async function Home() {
   const { data: posts, error } = await getHomePosts(supabase);
 
   return (
-      <main className="w-full my-4 px-2 flex flex-col flex-grow items-center">
+      <main className="w-full my-4 px-2 flex flex-col min-h-screen items-center">
         {error || posts.length === 0 ? (
-          <div>no posts found!</div>
+          <div className="text-primary-500 text-center">
+            <p>No posts yet </p>
+            <a className='underline underline-offset-2' href="/create">Create one</a>
+          </div>
         ) : (
           <section className="flex flex-col gap-2 w-full px-2 items-center">
             <h1 className="text-tiny text-foreground uppercase font-bold px-2">

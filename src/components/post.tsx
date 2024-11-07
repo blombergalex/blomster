@@ -27,13 +27,14 @@ export const Post = ({ username, title, slug, content, image }: postType) => {
         </CardHeader>
         <CardBody className="overflow-visible py-2 px-4">
           {image ? (
-            <Image
-              alt="Card background"
-              className="object-cover rounded-xl"
-              src={image}
-              width={270}
-              height={"auto"} //correct syntax?
-            />
+            // <Image
+            //   alt="Card background"
+            //   className="object-cover rounded-xl"
+            //   src={image}
+            //   width={270}
+            //   height={"auto"} //correct syntax?
+            // />
+            <p>Image here</p>
           ) : (
             <p>{trimmedContent}</p>
           )}

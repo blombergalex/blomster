@@ -1,8 +1,9 @@
-import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
+import { Card, CardBody, CardHeader, Image, Link } from "@nextui-org/react";
 import { notFound } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
 import { DeletePostButton } from "@/components/delete-post-button";
+import { EditPostButton } from "@/components/edit-post-button";
 
 export default async function PostPage({
   params,
@@ -19,21 +20,12 @@ export default async function PostPage({
   if (error || !post) notFound();
 
   const {
-    data: {user},
-  } = await supabase.auth.getUser()
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  const isAuthor = user && user.id === post.user_id
+  const isAuthor = user && user.id === post.user_id;
 
   const date = new Date(post.created_at);
-
-  // const options: Intl.DateTimeFormatOptions = {
-  //   weekday: "short",
-  //   day: "numeric",
-  //   month: "long",
-  //   year: "numeric",
-  //   dateStyle: "medium",
-  //   timeZoneName: "shortGeneric",
-  // };
 
   const otherDate = new Intl.DateTimeFormat("sv-SE", {
     weekday: "short",
@@ -49,13 +41,20 @@ export default async function PostPage({
     <Card className="py-4 shadow-none rounded-none w-full ">
       <CardHeader className="pb-0 pt-2 px-4 justify-between">
         <div>
-          <p className="text-tiny uppercase font-bold">{post.users?.username}</p>
+          <p className="text-tiny uppercase font-bold">
+            {post.users?.username}
+          </p>
           <h4 className="font-bold text-large">{post.title}</h4>
           <small className="text-default-500">{otherDate}</small>
         </div>
-      {isAuthor && (
-        <DeletePostButton postId={post.id}/>
-      )}
+        {isAuthor && (
+          <div className="flex gap-1">
+            <Link href={`/post/${params.slug}/edit`}>
+              <EditPostButton />
+            </Link>
+            <DeletePostButton postId={post.id} />
+          </div>
+        )}
       </CardHeader>
       <CardBody className="overflow-visible py-4">
         <Image

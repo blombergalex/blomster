@@ -41,7 +41,7 @@ const Header = async () => {
         <>
           <LogOutButton />
           <Link href={"/create"} className="self-center">
-            <Button className={`${buttonClasses} dark:border-1`}>Create post</Button>
+            <Button className={buttonClasses}>Create post</Button>
           </Link>
           <div className="mx-2">
             <h3 className="text-small uppercase font-semibold text-primary dark:text-foreground">{username}</h3>

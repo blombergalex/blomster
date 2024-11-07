@@ -35,7 +35,7 @@ export default function CreatePage() {
         onSubmit={handleSubmit((values) => mutate(values))}
         className="flex w-full flex-col gap-4 md:w-2/3"
       >
-        <Input {...register("title")} label="Title" />
+        <Input {...register("title")} label="Title"/>
         {errors.title && (
           <span className={errorClasses}>{errors.title.message}</span>
         )}
