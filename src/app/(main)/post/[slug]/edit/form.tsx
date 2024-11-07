@@ -1,3 +1,5 @@
+'use client'
+
 import { Tables } from "@/utils/supabase/database.types";
 import { buttonClasses, errorClasses } from "@/utils/classes";
 import { editPost } from "@/actions/edit-post";

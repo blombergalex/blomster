@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 
 import { createSlug } from "@/utils/create-slug";
 import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
 export const editPost = async ({ postId, data }: { 
   postId: string
@@ -49,13 +50,18 @@ if (profileError || !profile) {
   throw new Error("User profile not found, valid user login is needed to post");
 }
 
+  const slug = createSlug(parsedData, profile.username)
 
-  const updatedSlug = createSlug(parsedData, profile.username)
-
-  const {} = await supabase
+  const {error} = await supabase
     .from('posts')
-    .update({...parsedData, user_id: user.id, updatedSlug})
+    .update({...parsedData, user_id: user.id, slug})
+    .eq("id", postId)
     .throwOnError()
 
+    if (error){
+      throw new Error(`Failed to update post: ${error.message}`);
+      }
+
     revalidatePath("/")
+    redirect(`/post/${slug}`)
 };
