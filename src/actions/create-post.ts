@@ -14,6 +14,7 @@ export const createPost = async (data: z.infer<typeof postSchema>) => {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  
   if (!user) {
     throw new Error("User not authenticated");
   }
@@ -25,7 +26,7 @@ export const createPost = async (data: z.infer<typeof postSchema>) => {
     .single();
 
   if (profileError || !profile) {
-    throw new Error("User profile not found, must be logged in as valid user to post");
+    throw new Error("User profile not found, valid user login is needed to post");
   }
 
   const slug = createSlug(parsedData, profile.username);

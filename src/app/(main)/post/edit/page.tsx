@@ -1,20 +1,19 @@
 "use client";
 
-import { postSchema } from "@/actions/schemas";
-import { createPost } from "@/actions/create-post";
 import { buttonClasses, errorClasses } from "@/utils/classes";
+import { editPost } from "@/actions/edit-post";
+import { postSchema } from "@/actions/schemas";
 
-import { Button, Input } from "@nextui-org/react";
-import { Textarea } from "@nextui-org/input";
-import { toast } from "sonner";
+import { Button, Input, Textarea } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 
-export default function CreatePage() {
+export default function EditPage() {
   const { mutate, isPending } = useMutation({
-    mutationFn: createPost,
+    mutationFn: editPost,
     onError: (error) => toast.error(error.message),
   });
 
@@ -29,7 +28,7 @@ export default function CreatePage() {
   return (
     <main className="w-full px-2 flex flex-col my-4 flex-grow items-center">
       <h1 className="text-tiny text-foreground uppercase font-bold p-2">
-        create post
+        edit post
       </h1>
       <form
         onSubmit={handleSubmit((values) => mutate(values))}
