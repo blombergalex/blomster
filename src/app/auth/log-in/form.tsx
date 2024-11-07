@@ -17,7 +17,7 @@ export const LogInForm = () => {
     mutationFn: logIn,
     onError: (error) => toast.error(error.message),
     onSuccess: (_, variables) => {
-      toast.success(`Logged in as ${variables.email}`);
+      toast.success(`Logged in with ${variables.email}`);
     }
   });
 

@@ -10,11 +10,11 @@ export default function LogInPage() {
         <LogInForm />
       </div>
       <div className='text-primary-500 mt-6 text-small'>
-        <Link href='/auth/sign-up'>
+        <Link href='/auth/sign-up' className='hover:underline underline-offset-2'>
           Don&apos;t have an account? Sign up
         </Link>
         <p className='text-primary-500 text-center'>or</p>
-        <div className='text-center'>
+        <div className='text-center hover:underline underline-offset-2'>
           <Link href='/'>Continue as guest</Link>
         </div>
       </div>
