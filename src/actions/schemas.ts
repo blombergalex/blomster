@@ -15,3 +15,7 @@ export const postSchema = z.object({
   title: z.string().min(3, "Minimum 3 characters"),
   content: z.string().optional(),
 });
+
+export const commentSchema = z.object({
+  comment: z.string().min(1, "Comment must contain at least one character"),
+})

@@ -1,4 +1,4 @@
-import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
+import { Card, CardBody, CardHeader } from "@nextui-org/react";
 import { Tables } from "@/utils/supabase/database.types";
 
 import Link from "next/link";
@@ -7,7 +7,7 @@ import { useMemo } from "react";
 type postType = Pick<Tables<"posts">, "title" | "slug" | "image" | "content"> &
   Pick<Tables<"users">, "username">;
 
-export const Post = ({ username, title, slug, content, image }: postType) => {
+export const Post = ({ username, title, slug, content }: postType) => {
   const trimmedContent = useMemo(() => {
     if (!content) return "";
 
@@ -26,18 +26,7 @@ export const Post = ({ username, title, slug, content, image }: postType) => {
           <h4 className="font-bold text-large">{title}</h4>
         </CardHeader>
         <CardBody className="overflow-visible py-2 px-4">
-          {image ? (
-            // <Image
-            //   alt="Card background"
-            //   className="object-cover rounded-xl"
-            //   src={image}
-            //   width={270}
-            //   height={"auto"} //correct syntax?
-            // />
-            <p>Image here</p>
-          ) : (
-            <p>{trimmedContent}</p>
-          )}
+          <p>{trimmedContent}</p>
         </CardBody>
       </Card>
     </Link>

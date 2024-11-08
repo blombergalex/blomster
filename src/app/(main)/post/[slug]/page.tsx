@@ -1,9 +1,10 @@
-import { Card, CardBody, CardHeader, Image, Link } from "@nextui-org/react";
+import { Card, CardBody, CardHeader, Link } from "@nextui-org/react";
 import { notFound } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
 import { DeletePostButton } from "@/components/delete-post-button";
 import { EditPostButton } from "@/components/edit-post-button";
+import { CommentForm } from "./comment/form";
 
 export default async function PostPage({
   params,
@@ -38,6 +39,7 @@ export default async function PostPage({
   }).format(date);
 
   return (
+    <main>
     <Card className="py-4 shadow-none rounded-none w-full ">
       <CardHeader className="pb-0 pt-2 px-4 justify-between">
         <div>
@@ -57,14 +59,13 @@ export default async function PostPage({
         )}
       </CardHeader>
       <CardBody className="overflow-visible py-4">
-        <Image
-          alt="Card background"
-          className="object-cover rounded-xl"
-          src="https://nextui.org/images/hero-card-complete.jpeg" // fix actual imagesrc
-          width={270}
-        />
         <p className="text-md py-1">{post.content}</p>
       </CardBody>
     </Card>
+    <Card>
+      {/* render existing comments  */}
+      <CommentForm />
+    </Card>
+    </main>
   );
 }
