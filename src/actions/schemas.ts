@@ -7,7 +7,7 @@ export const logInSchema = z.object({
 
 export const signUpSchema = z.object({
   email: z.string().email(),
-  username: z.string().min(3, "Minimum 3 characters"),
+  username: z.string().min(3, "Minimum 3 characters").max(20, "Maximum 20 characters"),
   password: z.string().min(6, "Minimum 6 characters"),
 });
 
