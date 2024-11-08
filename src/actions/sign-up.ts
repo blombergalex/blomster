@@ -21,7 +21,7 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
   const {data: existingUserEmail} = await supabase.from('users').select('email').eq('email', parsedData.email).single()
 
   if (existingUserEmail) {
-    throw new Error('User with this email already exists')
+    throw new Error('A user with this email already exists')
   }
 
   const {
