@@ -22,14 +22,13 @@ export default async function Home() {
         </div>
       ) : (
         <section className="flex flex-col gap-2 w-full px-2 items-center">
-          {posts.map(({ id, title, slug, users, content, image }) => (
+          {posts.map(({ id, title, slug, users, content }) => (
             <Post
               key={id}
               username={users?.username || "anonymous"}
               title={title}
               slug={slug}
               content={content}
-              image={image}
             />
           ))}
         </section>

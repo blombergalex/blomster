@@ -5,6 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 import { DeletePostButton } from "@/components/delete-post-button";
 import { EditPostButton } from "@/components/edit-post-button";
 import { CommentForm } from "./comment/form";
+import { getPostComments } from "@/utils/supabase/queries";
 
 export default async function PostPage({
   params,
@@ -12,20 +13,28 @@ export default async function PostPage({
   params: { slug: string };
 }) {
   const supabase = createClient();
-  const { data: post, error } = await supabase
+  const { data: post, error: postError } = await supabase
     .from("posts")
     .select('id, title, content, user_id, users("username"), created_at')
     .eq("slug", params.slug)
     .single();
 
-  if (error || !post) notFound();
+  if (postError || !post) notFound();
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
   const isAuthor = user && user.id === post.user_id;
+  
+  const { data: comments, error: commentsError}  = await getPostComments(supabase)
+  console.log(comments)
+  // console.log("commentserror:", commentsError)
 
+  // if (commentsError || !comments) {
+  //   throw new Error("No comments found")
+  // }
+  
   const date = new Date(post.created_at);
 
   const otherDate = new Intl.DateTimeFormat("sv-SE", {
@@ -37,6 +46,8 @@ export default async function PostPage({
     minute: "numeric",
     timeZoneName: "shortGeneric",
   }).format(date);
+
+  const currentPath = `/post/${params.slug}`
 
   return (
     <main>
@@ -64,7 +75,10 @@ export default async function PostPage({
     </Card>
     <Card>
       {/* render existing comments  */}
-      <CommentForm />
+
+      {user && (
+        <CommentForm currentPath={currentPath}/>
+      )}
     </Card>
     </main>
   );

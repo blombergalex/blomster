@@ -4,7 +4,7 @@ import { Tables } from "@/utils/supabase/database.types";
 import Link from "next/link";
 import { useMemo } from "react";
 
-type postType = Pick<Tables<"posts">, "title" | "slug" | "image" | "content"> &
+type postType = Pick<Tables<"posts">, "title" | "slug" | "content"> &
   Pick<Tables<"users">, "username">;
 
 export const Post = ({ username, title, slug, content }: postType) => {
