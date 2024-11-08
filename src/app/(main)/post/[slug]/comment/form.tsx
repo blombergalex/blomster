@@ -1,6 +1,5 @@
 "use client";
 
-import { buttonClasses } from "@/utils/classes";
 
 import { Button, Input } from "@nextui-org/react";
 import { revalidatePath } from "next/cache";
@@ -17,15 +16,15 @@ export const CommentForm = ({currentPath}:{currentPath:string}) => {
 
 
   return (
-    <main>
+    <main className="p-2">
       <form 
       // onSubmit={}
-      className="flex w-full gap-4 md:w-2/3">
+      className="flex w-full gap-4 bg-transparent items-center">
         <Input label="Comment..." />
         {/* {error && (
           <span className={errorClasses}>{errors.comment.message}</span>
         )} */}
-        <Button type="submit" className={buttonClasses} onSubmit={refresh}>
+        <Button type="submit" onSubmit={refresh}>
           Add comment
           {/* {isPending ? "Adding comment..." : "Add comment"} */}
         </Button>

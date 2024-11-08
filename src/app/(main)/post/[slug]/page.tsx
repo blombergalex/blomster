@@ -29,11 +29,11 @@ export default async function PostPage({
   
   const { data: comments, error: commentsError}  = await getPostComments(supabase)
   console.log(comments)
-  // console.log("commentserror:", commentsError)
+  console.log("commentserror:", commentsError)
 
-  // if (commentsError || !comments) {
-  //   throw new Error("No comments found")
-  // }
+  if (commentsError || !comments) {
+    throw new Error("No comments found")
+  }
   
   const date = new Date(post.created_at);
 
@@ -50,8 +50,8 @@ export default async function PostPage({
   const currentPath = `/post/${params.slug}`
 
   return (
-    <main>
-    <Card className="py-4 shadow-none rounded-none w-full ">
+    <main className="flex flex-col justify-between gap-10 md:min-h-svh">
+    <Card className="py-4 shadow-none rounded-none w-full z-0">
       <CardHeader className="pb-0 pt-2 px-4 justify-between">
         <div>
           <p className="text-tiny uppercase font-bold">
@@ -73,9 +73,11 @@ export default async function PostPage({
         <p className="text-md py-1">{post.content}</p>
       </CardBody>
     </Card>
-    <Card>
+    <Card className="my-4 bg-background rounded-none shadow-none">
+      <p className="text-tiny uppercase font-semibold m-4">Comments</p>
+      <Card>
       {/* render existing comments  */}
-
+      </Card>
       {user && (
         <CommentForm currentPath={currentPath}/>
       )}
