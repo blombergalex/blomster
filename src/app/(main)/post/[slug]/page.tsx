@@ -33,7 +33,6 @@ export default async function PostPage({
     .order("created_at", { ascending: true })
     .eq("post_id", post.id);
 
-  console.log("got comments", comments);
   console.log("commentserror:", commentsError);
 
   if (commentsError || !comments) {

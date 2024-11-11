@@ -58,7 +58,7 @@ export const EditPostForm = ({
           <span className={errorClasses}>{errors.content.message}</span>
         )}
         <Button className={`${buttonClasses} self-end`} type="submit">
-          {isPending ? "Uploading post..." : "Post"}
+          {isPending ? "Updating post..." : "Update post"}
         </Button>
       </form>
     </main>
