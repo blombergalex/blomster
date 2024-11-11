@@ -17,6 +17,5 @@ export const postSchema = z.object({
 });
 
 export const commentSchema = z.object({
-  content: z.string().min(1, "Comment must contain at least one character"),
-  post_id: z.string()
+  content: z.string().min(1, "Comment must contain at least 1 character"),
 })

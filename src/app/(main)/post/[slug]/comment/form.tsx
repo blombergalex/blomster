@@ -15,8 +15,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 export const CommentForm = () => {
   const {mutate, isPending} = useMutation({
     mutationFn: createComment,
-    onError: (error) => toast.error(error.message),
-    onSuccess: () => toast.success("Comment added!"),
+    onError: (error) => {
+      console.log("comment failed", error)
+      toast.error(error.message)
+    },
+    onSuccess: (data) => {
+      console.log("Comment created:", data);
+      toast.success("Comment added!");
+    },
     onMutate: () => toast.loading("Creating comment..."),
     onSettled: () => toast.dismiss(),
   })
@@ -32,23 +38,22 @@ export const CommentForm = () => {
   console.log('commentform rendered')
 
   return (
-    <main className="p-2">
+    <main className="p-2 ">
       <form 
-
-        onSubmit={handleSubmit((values) => console.log("form submitted", values))}
+        onSubmit={handleSubmit((values) => mutate(values))}
         className="flex w-full gap-4 bg-transparent items-center">
-        <Input 
-        {...register("content")}
-        label="Comment..." 
-        name="content"
-        required/>
-        {errors && (
-          <span className={errorClasses}>{errors.content?.message}</span>
-        )}
-        <Button type="submit">
-          {isPending ? "Adding comment..." : "Add comment"}
-        </Button>
+          <Input
+          {...register("content")}
+          label="Comment..."
+          name="content"
+          required/>
+          <Button type="submit">
+            {isPending ? "Adding comment..." : "Add comment"}
+          </Button>
       </form>
+      {errors && (  
+        <div className={`${errorClasses} w-full`}>{errors.content?.message}</div>
+      )}
     </main>
   );
 };
