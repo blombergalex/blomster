@@ -1,28 +1,26 @@
-"use server"
+"use server";
 
-import { createClient } from "@/utils/supabase/server"
-import { commentSchema } from "./schemas"
-import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import { createClient } from "@/utils/supabase/server";
+import { commentSchema } from "./schemas";
 import { z } from "zod";
 
-export const createComment = async (data:z.infer<typeof commentSchema>) => {
-  const parsedData = commentSchema.parse(data)
-  const supabase = createClient()
+export const createComment = async (data: z.infer<typeof commentSchema>) => {
+  const parsedData = commentSchema.parse(data);
+  const supabase = createClient();
 
   const {
-    data: {user},
-   } = await supabase.auth.getUser()
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user) {
-    throw new Error("You must be logged in to comment")
+    throw new Error("You must be logged in to comment");
   }
 
-//
+  const {data: comment, error: commentError} = await supabase 
+    .from('')
 
-  const {}
-  }
 
+};
 
 // unique key contraint when adding second comment
 

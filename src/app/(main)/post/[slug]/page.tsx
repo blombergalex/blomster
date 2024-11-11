@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 import { DeletePostButton } from "@/components/delete-post-button";
 import { EditPostButton } from "@/components/edit-post-button";
 import { CommentForm } from "./comment/form";
-import { getPostComments } from "@/utils/supabase/queries";
+import { Comment } from "@/components/comment";
 
 export default async function PostPage({
   params,
@@ -26,15 +26,20 @@ export default async function PostPage({
   } = await supabase.auth.getUser();
 
   const isAuthor = user && user.id === post.user_id;
-  
-  const { data: comments, error: commentsError}  = await getPostComments(supabase)
-  console.log(comments)
-  console.log("commentserror:", commentsError)
+
+  const { data: comments, error: commentsError } = await supabase
+    .from("comments")
+    .select('id, content, users("username")')
+    .order("created_at", { ascending: true })
+    .eq("post_id", post.id);
+
+  console.log("got comments", comments);
+  console.log("commentserror:", commentsError);
 
   if (commentsError || !comments) {
-    throw new Error("No comments found")
+    throw new Error("No comments found");
   }
-  
+
   const date = new Date(post.created_at);
 
   const otherDate = new Intl.DateTimeFormat("sv-SE", {
@@ -47,41 +52,39 @@ export default async function PostPage({
     timeZoneName: "shortGeneric",
   }).format(date);
 
-  const currentPath = `/post/${params.slug}`
+  const currentPath = `/post/${params.slug}`;
 
   return (
     <main className="flex flex-col justify-between gap-10 md:min-h-svh">
-    <Card className="py-4 shadow-none rounded-none w-full z-0">
-      <CardHeader className="pb-0 pt-2 px-4 justify-between">
-        <div>
-          <p className="text-tiny uppercase font-bold">
-            {post.users?.username}
-          </p>
-          <h4 className="font-bold text-large">{post.title}</h4>
-          <small className="text-default-500">{otherDate}</small>
-        </div>
-        {isAuthor && (
-          <div className="flex gap-1">
-            <Link href={`/post/${params.slug}/edit`}>
-              <EditPostButton />
-            </Link>
-            <DeletePostButton postId={post.id} />
+      <Card className="py-4 shadow-none rounded-none w-full z-0">
+        <CardHeader className="pb-0 pt-2 px-4 justify-between">
+          <div>
+            <p className="text-tiny uppercase font-bold">
+              {post.users?.username}
+            </p>
+            <h4 className="font-bold text-large">{post.title}</h4>
+            <small className="text-default-500">{otherDate}</small>
           </div>
-        )}
-      </CardHeader>
-      <CardBody className="overflow-visible py-4">
-        <p className="text-md py-1">{post.content}</p>
-      </CardBody>
-    </Card>
-    <Card className="my-4 bg-background rounded-none shadow-none">
-      <p className="text-tiny uppercase font-semibold m-4">Comments</p>
-      <Card>
-      {/* render existing comments  */}
+          {isAuthor && (
+            <div className="flex gap-1">
+              <Link href={`/post/${params.slug}/edit`}>
+                <EditPostButton />
+              </Link>
+              <DeletePostButton postId={post.id} />
+            </div>
+          )}
+        </CardHeader>
+        <CardBody className="overflow-visible py-4">
+          <p className="text-md py-1">{post.content}</p>
+        </CardBody>
       </Card>
-      {user && (
-        <CommentForm currentPath={currentPath}/>
-      )}
-    </Card>
+      <Card className="my-4 bg-background rounded-none shadow-none">
+        <p className="text-tiny uppercase font-semibold m-4">Comments</p>
+        {comments.map(({ id, content, users }) => (
+          <Comment key={id} content={content} user={users?.username} /> // fix type error
+        ))}
+        {user && <CommentForm currentPath={currentPath} />}
+      </Card>
     </main>
   );
 }
