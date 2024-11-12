@@ -82,7 +82,7 @@ if (userError || !user) {
         {comments && comments.map(({ id, content, users}) => (
           <Comment key={id} content={content} user={users?.username}/> // fix type error
         ))}
-        {user && <CommentForm postId={post.id} />}
+        {user && <CommentForm post_id={post.id} />}
       </Card>
     </main>
   );

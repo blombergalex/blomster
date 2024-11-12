@@ -13,16 +13,15 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 
-export const CommentForm = ({postId}:{postId: Pick<Tables<"comments">, "post_id">}) => {
+export const CommentForm = ({post_id} : Pick<Tables<"comments">, "post_id">) => {
   const {mutate, isPending} = useMutation({
     mutationFn: createComment,
     onError: (error) => {
-      console.log("comment failed", error)
       toast.error(error.message)
     },
-    onSuccess: (data) => {
-      console.log("Comment created:", data);
+    onSuccess: () => {
       toast.success("Comment added!");
+      reset();
     },
     onMutate: () => toast.loading("Creating comment..."),
     onSettled: () => toast.dismiss(),
@@ -31,20 +30,20 @@ export const CommentForm = ({postId}:{postId: Pick<Tables<"comments">, "post_id"
   const {
     register,
     handleSubmit,
+    reset,
     formState: {errors},
   } = useForm<z.infer<typeof commentSchema>>({
     resolver: zodResolver(commentSchema),
     defaultValues: {
-      postId,
+      post_id
     }
   })
 
-  console.log(defaultValues)
 
   return (
     <main className="p-2 ">
       <form 
-        onSubmit={handleSubmit((values) => mutate(values, postId))}
+        onSubmit={handleSubmit((values) => mutate(values))}
         className="flex w-full gap-4 bg-transparent items-center">
           <Input
           {...register("content")}
