@@ -21,11 +21,11 @@ export default async function PostPage({
 
   if (postError || !post) notFound();
 
-  const {data: user, error: userError } = await supabase.auth.getUser();
+  const { data: user, error: userError } = await supabase.auth.getUser();
 
-if (userError || !user) {
-  throw new Error("User not found")
-}
+  if (userError || !user) {
+    throw new Error("User not found");
+  }
 
   const isAuthor = user && user.user.id === post.user_id;
 
@@ -79,9 +79,15 @@ if (userError || !user) {
       </Card>
       <Card className="my-4 bg-background rounded-none shadow-none">
         <p className="text-tiny uppercase font-semibold m-4">Comments</p>
-        {comments && comments.map(({ id, content, users}) => (
-          <Comment key={id} content={content} user={users?.username}/> // fix type error
-        ))}
+        {comments &&
+          comments.map(({ id, content, users }) => (
+            <Comment
+              key={id}
+              content={content}
+              user={users?.username}
+              post_id={post.id}
+            />
+          ))}
         {user && <CommentForm post_id={post.id} />}
       </Card>
     </main>

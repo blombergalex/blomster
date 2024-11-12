@@ -1,17 +1,18 @@
 "use client";
 
-import { Button } from "@nextui-org/react";
-import { deletePost } from "@/actions/delete-post";
+import { deleteComment } from "@/actions/delete-comment";
 import { secondaryButtonClasses } from "@/utils/classes";
+
+import { Button } from "@nextui-org/react";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-export const DeletePostButton = ({ postId }: { postId: string }) => {
+export const DeleteCommentButton = ({ postId }: { postId: string }) => {
   const { mutate } = useMutation({
-    mutationFn: () => deletePost(postId),
+    mutationFn: () => deleteComment(postId),
     onError: (error) => toast.error(error.message),
-    onSuccess: () => toast.success("Deleted post"),
-    onMutate: () => toast.loading("Deleting post"),
+    onSuccess: () => toast.success("Deleted comment"),
+    onMutate: () => toast.loading("Deleting comment"),
     onSettled: () => toast.dismiss(),
   });
 
