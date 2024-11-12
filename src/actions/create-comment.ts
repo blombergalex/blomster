@@ -33,7 +33,7 @@ if (profileError || !profile) {
 const {data: post, error: postError} = await supabase
   .from('posts')
   .select('slug')
-  .eq("id", parsedData.post_id)  // type error
+  .eq("id", parsedData.post_id) 
   .single()
 
   if (postError || !post) {

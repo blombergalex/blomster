@@ -15,7 +15,7 @@ export type Database = {
           created_at: string
           id: string
           post_id: string
-          user: string
+          user: string | undefined
         }
         Insert: {
           content: string

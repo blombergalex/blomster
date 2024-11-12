@@ -21,11 +21,13 @@ export default async function PostPage({
 
   if (postError || !post) notFound();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const {data: user, error: userError } = await supabase.auth.getUser();
 
-  const isAuthor = user && user.id === post.user_id;
+if (userError || !user) {
+  throw new Error("User not found")
+}
+
+  const isAuthor = user && user.user.id === post.user_id;
 
   const { data: comments, error: commentsError } = await supabase
     .from("comments")
@@ -50,8 +52,6 @@ export default async function PostPage({
     minute: "numeric",
     timeZoneName: "shortGeneric",
   }).format(date);
-
-  const currentPath = `/post/${params.slug}`;
 
   return (
     <main className="flex flex-col justify-between gap-10 md:min-h-svh">
@@ -79,10 +79,10 @@ export default async function PostPage({
       </Card>
       <Card className="my-4 bg-background rounded-none shadow-none">
         <p className="text-tiny uppercase font-semibold m-4">Comments</p>
-        {comments.map(({ id, content, users }) => (
-          <Comment key={id} content={content} user={users?.username} /> // fix type error
+        {comments && comments.map(({ id, content, users}) => (
+          <Comment key={id} content={content} user={users?.username}/> // fix type error
         ))}
-        {user && <CommentForm currentPath={currentPath} />}
+        {user && <CommentForm postId={post.id} />}
       </Card>
     </main>
   );

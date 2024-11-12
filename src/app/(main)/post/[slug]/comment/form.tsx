@@ -3,6 +3,7 @@
 import { createComment } from "@/actions/create-comment";
 import { commentSchema } from "@/actions/schemas";
 import { errorClasses } from "@/utils/classes";
+import { Tables } from "@/utils/supabase/database.types";
 
 import { Button, Input } from "@nextui-org/react";
 import { toast } from "sonner";
@@ -12,7 +13,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 
-export const CommentForm = () => {
+export const CommentForm = ({postId}:{postId: string}) => {
   const {mutate, isPending} = useMutation({
     mutationFn: createComment,
     onError: (error) => {
@@ -33,14 +34,17 @@ export const CommentForm = () => {
     formState: {errors},
   } = useForm<z.infer<typeof commentSchema>>({
     resolver: zodResolver(commentSchema),
+    defaultValues: {
+      post_id,
+    }
   })
 
-  console.log('commentform rendered')
+  console.log(defaultValues)
 
   return (
     <main className="p-2 ">
       <form 
-        onSubmit={handleSubmit((values) => mutate(values))}
+        onSubmit={handleSubmit((values) => mutate(values, postId))}
         className="flex w-full gap-4 bg-transparent items-center">
           <Input
           {...register("content")}
