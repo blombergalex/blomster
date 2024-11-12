@@ -13,7 +13,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 
-export const CommentForm = ({postId}:{postId: string}) => {
+export const CommentForm = ({postId}:{postId: Pick<Tables<"comments">, "post_id">}) => {
   const {mutate, isPending} = useMutation({
     mutationFn: createComment,
     onError: (error) => {
@@ -35,7 +35,7 @@ export const CommentForm = ({postId}:{postId: string}) => {
   } = useForm<z.infer<typeof commentSchema>>({
     resolver: zodResolver(commentSchema),
     defaultValues: {
-      post_id,
+      postId,
     }
   })
 
