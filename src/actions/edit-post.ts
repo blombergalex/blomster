@@ -1,6 +1,5 @@
 "use server";
 
-
 import { postSchema } from "./schemas";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
@@ -9,9 +8,12 @@ import { createSlug } from "@/utils/create-slug";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
-export const editPost = async ({ postId, data }: { 
-  postId: string
-  data: z.infer<typeof postSchema>
+export const editPost = async ({
+  postId,
+  data,
+}: {
+  postId: string;
+  data: z.infer<typeof postSchema>;
 }) => {
   const parsedData = postSchema.parse(data);
   const supabase = createClient();
@@ -30,38 +32,40 @@ export const editPost = async ({ postId, data }: {
     .eq("id", postId)
     .single();
 
-  if(!post) {
-    throw new Error('Post not found')
+  if (!post) {
+    throw new Error("Post not found");
   }
 
-  const isAuthor = user && user.id === post.user_id
+  const isPostAuthor = user && user.id === post.user_id;
 
-  if (!isAuthor) {
-    throw new Error('You are not allowed to edit this post')
+  if (!isPostAuthor) {
+    throw new Error("You are not allowed to edit this post");
   }
 
   const { data: profile, error: profileError } = await supabase
-  .from("users")
-  .select("username")
-  .eq("id", user.id)
-  .single();
+    .from("users")
+    .select("username")
+    .eq("id", user.id)
+    .single();
 
-if (profileError || !profile) {
-  throw new Error("User profile not found, valid user login is needed to post");
-}
+  if (profileError || !profile) {
+    throw new Error(
+      "User profile not found, valid user login is needed to post"
+    );
+  }
 
-  const slug = createSlug(parsedData, profile.username)
+  const slug = createSlug(parsedData, profile.username);
 
-  const {error} = await supabase
-    .from('posts')
-    .update({...parsedData, user_id: user.id, slug})
+  const { error } = await supabase
+    .from("posts")
+    .update({ ...parsedData, user_id: user.id, slug })
     .eq("id", postId)
-    .throwOnError()
+    .throwOnError();
 
-    if (error){
-      throw new Error(`Failed to update post: ${error.message}`);
-      }
+  if (error) {
+    throw new Error(`Failed to update post: ${error.message}`);
+  }
 
-    revalidatePath("/")
-    redirect(`/post/${slug}`)
+  revalidatePath("/");
+  redirect(`/post/${slug}`);
 };

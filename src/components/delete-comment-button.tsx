@@ -1,7 +1,6 @@
 "use client";
 
 import { deleteComment } from "@/actions/delete-comment";
-import { secondaryButtonClasses } from "@/utils/classes";
 
 import { Button } from "@nextui-org/react";
 import { useMutation } from "@tanstack/react-query";
@@ -17,7 +16,7 @@ export const DeleteCommentButton = ({ postId }: { postId: string }) => {
   });
 
   return (
-    <Button className={secondaryButtonClasses} onClick={() => mutate()}>
+    <Button className="w-fit" onClick={() => mutate()}>
       Delete
     </Button>
   );

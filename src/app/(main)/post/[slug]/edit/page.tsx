@@ -1,26 +1,26 @@
-import { createClient } from '@/utils/supabase/server'
-import { EditPostForm } from './form'
+import { createClient } from "@/utils/supabase/server";
+import { EditPostForm } from "./form";
 
-import { notFound } from 'next/navigation'
+import { notFound } from "next/navigation";
 
 export default async function EditPage({
   params,
 }: {
-  params: { slug: string }
+  params: { slug: string };
 }) {
-  const supabase = createClient()
+  const supabase = createClient();
   const { data: post, error } = await supabase
-    .from('posts')
-    .select('id, title, content, user_id')
-    .eq('slug', params.slug)
-    .single()
+    .from("posts")
+    .select("id, title, content, user_id")
+    .eq("slug", params.slug)
+    .single();
 
   const {
     data: { user },
-  } = await supabase.auth.getUser()
-  const isAuthor = user && user.id === post?.user_id
+  } = await supabase.auth.getUser();
+  const isPostAuthor = user && user.id === post?.user_id;
 
-  if (error || !post || !isAuthor) notFound()
+  if (error || !post || !isPostAuthor) notFound();
 
   return (
     <main className="w-full px-2 flex flex-col my-4 flex-grow items-center">
@@ -29,5 +29,5 @@ export default async function EditPage({
       </h1>
       <EditPostForm defaultValues={post} postId={post.id} />
     </main>
-  )
+  );
 }

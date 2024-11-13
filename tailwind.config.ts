@@ -39,7 +39,6 @@ const config: Config = {
               300: '#F4743B', // Dark orange
               400: '#0A210F', // Dark green text color
               500: '#3E3C3C', // grey
-              
             },
           },
         },

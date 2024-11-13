@@ -27,7 +27,7 @@ export default async function PostPage({
     throw new Error("User not found");
   }
 
-  const isAuthor = user && user.user.id === post.user_id;
+  const isPostAuthor = user && user.user.id === post.user_id; // det finns en inloggad användare, och inloggad användares id är samma id som användaren som skrivit posten
 
   const { data: comments, error: commentsError } = await supabase
     .from("comments")
@@ -64,7 +64,7 @@ export default async function PostPage({
             <h4 className="font-bold text-large">{post.title}</h4>
             <small className="text-default-500">{otherDate}</small>
           </div>
-          {isAuthor && (
+          {isPostAuthor && (
             <div className="flex gap-1">
               <Link href={`/post/${params.slug}/edit`}>
                 <EditPostButton />
@@ -86,6 +86,7 @@ export default async function PostPage({
               content={content}
               user={users?.username}
               post_id={post.id}
+              isPostAuthor={isPostAuthor}
             />
           ))}
         {user && <CommentForm post_id={post.id} />}
