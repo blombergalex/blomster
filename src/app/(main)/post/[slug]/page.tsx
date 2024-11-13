@@ -27,15 +27,15 @@ export default async function PostPage({
     throw new Error("User not found");
   }
 
-  const isPostAuthor = user && user.user.id === post.user_id; // det finns en inloggad användare, och inloggad användares id är samma id som användaren som skrivit posten
+  const auth_user_id = user.user.id;
+  console.log("auth_user_id:", auth_user_id)
+  const isPostAuthor = user && auth_user_id === post.user_id; 
 
   const { data: comments, error: commentsError } = await supabase
     .from("comments")
-    .select('id, content, users("username")')
+    .select('id, content, users("username"), comment_user_id')
     .order("created_at", { ascending: true })
     .eq("post_id", post.id);
-
-  console.log("commentserror:", commentsError);
 
   if (commentsError || !comments) {
     throw new Error("No comments found");
@@ -53,11 +53,12 @@ export default async function PostPage({
     timeZoneName: "shortGeneric",
   }).format(date);
 
+
   return (
     <main className="flex flex-col justify-between gap-10 md:min-h-svh">
       <Card className="py-4 shadow-none rounded-none w-full z-0">
-        <CardHeader className="pb-0 pt-2 px-4 justify-between">
-          <div>
+        <CardHeader className="pb-0 pt-2 px-4 justify-between flex-wrap">
+          <div className="w-full md:w-fit">
             <p className="text-tiny uppercase font-bold">
               {post.users?.username}
             </p>
@@ -80,13 +81,15 @@ export default async function PostPage({
       <Card className="my-4 bg-background rounded-none shadow-none">
         <p className="text-tiny uppercase font-semibold m-4">Comments</p>
         {comments &&
-          comments.map(({ id, content, users }) => (
+          comments.map(({ id, content, users, comment_user_id}) => (
             <Comment
               key={id}
               content={content}
               user={users?.username}
               post_id={post.id}
               isPostAuthor={isPostAuthor}
+              comment_user_id={comment_user_id}
+              auth_user_id={auth_user_id}
             />
           ))}
         {user && <CommentForm post_id={post.id} />}

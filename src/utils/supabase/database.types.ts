@@ -11,39 +11,39 @@ export type Database = {
     Tables: {
       comments: {
         Row: {
+          comment_user_id: string
           content: string
           created_at: string
           id: string
           post_id: string
-          user: string | undefined
         }
         Insert: {
+          comment_user_id: string
           content: string
           created_at?: string
           id?: string
           post_id: string
-          user: string
         }
         Update: {
+          comment_user_id?: string
           content?: string
           created_at?: string
           id?: string
           post_id?: string
-          user?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "comments_comment_user_id_fkey"
+            columns: ["comment_user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "comments_post_id_fkey"
             columns: ["post_id"]
             isOneToOne: false
             referencedRelation: "posts"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "comments_user_fkey"
-            columns: ["user"]
-            isOneToOne: false
-            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]

@@ -25,7 +25,7 @@ export default async function Home() {
           {posts.map(({ id, title, slug, users, content }) => (
             <Post
               key={id}
-              username={users?.username || "anonymous"}
+              username={users?.username || "unknown"}
               title={title}
               slug={slug}
               content={content}

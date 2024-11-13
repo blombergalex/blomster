@@ -16,7 +16,7 @@ export const DeleteCommentButton = ({ postId }: { postId: string }) => {
   });
 
   return (
-    <Button className="w-fit" onClick={() => mutate()}>
+    <Button className="w-fit m-1 md:m-4" onClick={() => mutate()}>
       Delete
     </Button>
   );
