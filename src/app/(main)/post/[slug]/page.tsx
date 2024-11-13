@@ -83,6 +83,7 @@ export default async function PostPage({
         {comments &&
           comments.map(({ id, content, users, comment_user_id}) => (
             <Comment
+              id={id}
               key={id}
               content={content}
               user={users?.username}

@@ -44,7 +44,7 @@ export const createComment = async (data: z.infer<typeof commentSchema>) => {
 
   const {} = await supabase
     .from("comments")
-    .insert([{ ...parsedData, user: user.id }])
+    .insert([{ ...parsedData, comment_user_id: user.id }])
     .throwOnError();
 
   revalidatePath(`/post/${post?.slug}`);
