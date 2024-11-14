@@ -41,7 +41,7 @@ export const CommentForm = ({post_id} : Pick<Tables<"comments">, "post_id">) => 
 
 
   return (
-    <main className="p-2 ">
+    <main className="p-4 ">
       <form 
         onSubmit={handleSubmit((values) => mutate(values))}
         className="flex w-full gap-4 bg-transparent items-center">

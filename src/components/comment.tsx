@@ -37,15 +37,15 @@ export const Comment = ({
 
   return (
     <>
-      <div className="flex flex-col px-4 justify-items-center border-foreground border-b-1 items-end md:flex-row">
+      <div className="flex flex-col px-4 justify-items-center border-foreground border-b-1 items-end md:flex-row relative">
         <CardBody>
+        {(isCommentAuthor || isPostAuthor) && (
+          <DeleteCommentButton postId={post_id} commentId={id} />
+        )}
           <p className="text-tiny uppercase font-bold">@{user}</p>
           <small className="text-default-500">{reformattedDate}</small>
           <p>{content}</p>
         </CardBody>
-        {(isCommentAuthor || isPostAuthor) && (
-          <DeleteCommentButton postId={post_id} commentId={id} />
-        )}
       </div>
     </>
   );

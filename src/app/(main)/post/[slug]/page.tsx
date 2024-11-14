@@ -53,9 +53,8 @@ export default async function PostPage({
     timeZoneName: "shortGeneric",
   }).format(date);
 
-
   return (
-    <main className="flex flex-col justify-between gap-10 md:min-h-svh">
+    <main className="flex flex-col justify-between gap-10 min-h-screen">
       <Card className="py-4 shadow-none rounded-none w-full z-0">
         <CardHeader className="pb-0 pt-2 px-4 justify-between flex-wrap">
           <div className="w-full md:w-fit">
