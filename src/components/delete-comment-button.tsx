@@ -7,16 +7,16 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export const DeleteCommentButton = ({
-  // postId,
-  // commentUserId,
   commentId,
+  postId,
+  // commentUserId,
 }: {
-  // postId: string;
-  // commentUserId: string;
   commentId: string;
+  postId: string;
+  // commentUserId: string;
 }) => {
   const { mutate } = useMutation({
-    mutationFn: () => deleteComment(commentId),
+    mutationFn: () => deleteComment(commentId, postId),
     onError: (error) => toast.error(error.message),
     onSuccess: () => toast.success("Deleted comment"),
     onMutate: () => toast.loading("Deleting comment"),
