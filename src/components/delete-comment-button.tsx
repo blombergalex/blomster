@@ -3,8 +3,8 @@
 import { deleteComment } from "@/actions/delete-comment";
 
 import { Button } from "@nextui-org/react";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
+// import { useMutation } from "@tanstack/react-query";
+// import { toast } from "sonner";
 
 export const DeleteCommentButton = ({
   postId,

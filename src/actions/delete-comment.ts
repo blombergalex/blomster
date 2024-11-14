@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-// import { revalidatePath } from "next/cache"
+import { revalidatePath } from "next/cache"
 
 export const deleteComment = async (postId: string, commentUserId: string, commentId: string) => {
   const supabase = createClient();
@@ -17,7 +17,7 @@ export const deleteComment = async (postId: string, commentUserId: string, comme
   // check if logged in user is post author
   const { data: post } = await supabase
     .from("posts")
-    .select("user_id")
+    .select("user_id, slug")
     .eq("id", postId)
     .single();
 
@@ -33,5 +33,5 @@ export const deleteComment = async (postId: string, commentUserId: string, comme
   await supabase.from("comments").delete().eq("id", commentId).throwOnError(); //id av den kommentar som ska tas bort ska va lika med commentId som skickas in
 
   //revalidatePath like in create comment, get slug from post
-  // revalidatePath(`/post/${post?.slug}`);
+  revalidatePath(`/post/${post?.slug}`);
 };
