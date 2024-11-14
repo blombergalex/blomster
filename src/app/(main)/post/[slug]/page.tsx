@@ -74,7 +74,7 @@ export default async function PostPage({
           )}
         </CardHeader>
         <CardBody className="overflow-visible py-4">
-          <p className="text-md py-1">{post.content}</p>
+          <p className="text-md p-1">{post.content}</p>
         </CardBody>
       </Card>
       <Card className="my-4 bg-background rounded-none shadow-none">
