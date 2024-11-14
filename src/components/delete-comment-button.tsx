@@ -26,7 +26,7 @@ export const DeleteCommentButton = ({
   return (
     <Button
       className="w-fit m-1 md:m-4"
-      onClick={() => deleteComment(postId, commentUserId, commentId)} // comment Id behövs för att ta bort kommentaren som har det ID som skickas in i delete-action genom commentId
+      onClick={() => deleteComment(postId, commentUserId, commentId)} 
     >
       Delete
     </Button>
