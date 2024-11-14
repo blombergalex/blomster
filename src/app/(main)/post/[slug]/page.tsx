@@ -33,7 +33,7 @@ export default async function PostPage({
 
   const { data: comments, error: commentsError } = await supabase
     .from("comments")
-    .select('id, content, users("username"), comment_user_id')
+    .select('id, content, users("username"), comment_user_id, created_at')
     .order("created_at", { ascending: true })
     .eq("post_id", post.id);
 
@@ -43,7 +43,7 @@ export default async function PostPage({
 
   const date = new Date(post.created_at);
 
-  const otherDate = new Intl.DateTimeFormat("sv-SE", {
+  const reformattedDate = new Intl.DateTimeFormat("sv-SE", {
     weekday: "short",
     day: "numeric",
     month: "long",
@@ -63,7 +63,7 @@ export default async function PostPage({
               {post.users?.username}
             </p>
             <h4 className="font-bold text-large">{post.title}</h4>
-            <small className="text-default-500">{otherDate}</small>
+            <small className="text-default-500">{reformattedDate}</small>
           </div>
           {isPostAuthor && (
             <div className="flex gap-1">
@@ -81,7 +81,7 @@ export default async function PostPage({
       <Card className="my-4 bg-background rounded-none shadow-none">
         <p className="text-tiny uppercase font-semibold m-4">Comments</p>
         {comments &&
-          comments.map(({ id, content, users, comment_user_id}) => (
+          comments.map(({ id, content, users, comment_user_id, created_at}) => (
             <Comment
               id={id}
               key={id}
@@ -91,6 +91,7 @@ export default async function PostPage({
               isPostAuthor={isPostAuthor}
               comment_user_id={comment_user_id}
               auth_user_id={auth_user_id}
+              created_at={created_at}
             />
           ))}
         {user && <CommentForm post_id={post.id} />}

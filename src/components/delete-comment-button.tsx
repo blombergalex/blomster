@@ -22,11 +22,16 @@ export const DeleteCommentButton = ({
   });
 
   return (
+    <>
     <Button
-      className="w-fit m-1 md:m-4"
+      className="hidden w-fit m-3 sm:flex"
       onClick={() => mutate()}
-    >
+      >
       Delete
     </Button>
+    <div className="font-semibold m-2 sm:hidden">
+
+    </div>
+    </>
   );
 };
