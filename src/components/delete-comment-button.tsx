@@ -9,11 +9,9 @@ import { toast } from "sonner";
 export const DeleteCommentButton = ({
   commentId,
   postId,
-  // commentUserId,
 }: {
   commentId: string;
   postId: string;
-  // commentUserId: string;
 }) => {
   const { mutate } = useMutation({
     mutationFn: () => deleteComment(commentId, postId),
@@ -26,7 +24,7 @@ export const DeleteCommentButton = ({
   return (
     <Button
       className="w-fit m-1 md:m-4"
-      onClick={() => mutate()} // fix mutate and zod :)
+      onClick={() => mutate()}
     >
       Delete
     </Button>

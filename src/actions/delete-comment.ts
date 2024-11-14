@@ -20,7 +20,6 @@ export const deleteComment = async ( commentId: string, postId: string) => {
       throw new Error("Failed to fetch post or post does not exist");
     }
 
-  
   const isPostAuthor = user && user.id === post?.user_id;
 
   const {data: comment, error: commentError} = await supabase 
@@ -33,20 +32,13 @@ export const deleteComment = async ( commentId: string, postId: string) => {
       throw new Error("Failed to fetch the comment or comment does not exist");
     }
 
-//   const isCommentAuthor = user && user.id === comment?.comment_user_id 
+  const isCommentAuthor = user && user.id === comment?.comment_user_id 
 
-//   if (!isPostAuthor && !isCommentAuthor) { 
-//     throw new Error("You are not allowed to delete this comment");
-//   } 
-
-    // if (!isPostAuthor) {
-    //   throw new Error("You are not the author of this post so you are not allowed to delete this comment")
-    // }
+  if (!isPostAuthor && !isCommentAuthor) { 
+    throw new Error("You are not allowed to delete this comment");
+  } 
 
   await supabase.from("comments").delete().eq("id", commentId).throwOnError();
 
-  // revalidatePath(`/post/${post?.slug}`);
-// };
-
-  // return { success: true };
+  revalidatePath(`/post/${post?.slug}`);
 };

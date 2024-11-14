@@ -29,10 +29,9 @@ export const Comment = ({
           <p className="text-tiny uppercase font-bold">@{user}</p>
           <p>{content}</p>
         </CardBody>
-        {/* fix to include author of comment  */}
-        {/* {(isCommentAuthor || isPostAuthor) && ( */}
-          <DeleteCommentButton postId={post_id} commentId={id} commentUserId={comment_user_id} />
-        {/* )} */}
+        {(isCommentAuthor || isPostAuthor) && (
+          <DeleteCommentButton postId={post_id} commentId={id} />
+        )}
       </div>
     </>
   );
