@@ -7,11 +7,15 @@ import { redirect } from "next/navigation";
 export const deletePost = async (postId: string) => {
   const supabase = createClient();
 
-  const { data: post } = await supabase
+  const { data: post, error: postError } = await supabase
     .from("posts")
     .select("user_id")
     .eq("id", postId)
     .single();
+
+    if (postError || !post) {
+      throw new Error("Could not get post")
+    }
 
   const {
     data: { user },

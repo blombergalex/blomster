@@ -1,8 +1,9 @@
 "use client";
 
-import { Button } from "@nextui-org/react";
 import { deletePost } from "@/actions/delete-post";
 import { secondaryButtonClasses } from "@/utils/classes";
+
+import { Button } from "@nextui-org/react";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
