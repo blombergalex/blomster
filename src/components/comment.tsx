@@ -7,7 +7,7 @@ import { DeleteCommentButton } from "./delete-comment-button";
 type commentType = Pick<Tables<"comments">, "id" | "content" | "comment_user_id" | "post_id" | "created_at"> & {
   isPostAuthor: boolean;
   user: string | undefined;
-  auth_user_id: string;
+  auth_user_id: string | undefined;
 };
 
 export const Comment = ({
