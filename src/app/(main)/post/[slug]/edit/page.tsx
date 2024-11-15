@@ -20,7 +20,9 @@ export default async function EditPage({
   } = await supabase.auth.getUser();
   const isPostAuthor = user && user.id === post?.user_id;
 
-  if (error || !post || !isPostAuthor) notFound();
+  if (error || !post || !isPostAuthor) {
+    notFound();
+  }
 
   return (
     <main className="w-full px-2 flex flex-col my-4 flex-grow items-center">
