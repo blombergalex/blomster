@@ -21,13 +21,9 @@ export default async function PostPage({
 
   if (postError || !post) notFound();
 
-  const { data: user, error: userError } = await supabase.auth.getUser();
+  const { data: user } = await supabase.auth.getUser();
 
-  if (userError || !user) {
-    throw new Error("User not found");
-  }
-
-  const auth_user_id = user.user.id;
+  const auth_user_id = user.user?.id;
   console.log("auth_user_id:", auth_user_id)
   const isPostAuthor = user && auth_user_id === post.user_id; 
 
