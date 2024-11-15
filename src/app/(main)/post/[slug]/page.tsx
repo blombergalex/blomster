@@ -24,7 +24,6 @@ export default async function PostPage({
   const { data: user } = await supabase.auth.getUser();
 
   const auth_user_id = user.user?.id;
-  console.log("auth_user_id:", auth_user_id)
   const isPostAuthor = user && auth_user_id === post.user_id; 
 
   const { data: comments, error: commentsError } = await supabase

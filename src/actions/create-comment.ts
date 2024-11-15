@@ -7,7 +7,6 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 
 export const createComment = async (data: z.infer<typeof commentSchema>) => {
-  console.log("running createComment action");
   const parsedData = commentSchema.parse(data);
 
   const supabase = createClient();
@@ -42,10 +41,11 @@ export const createComment = async (data: z.infer<typeof commentSchema>) => {
     throw new Error("Associated post not found for this comment");
   }
 
-  const {} = await supabase
+  const {error: commentError} = await supabase
     .from("comments")
     .insert([{ ...parsedData, comment_user_id: user.id }])
-    .throwOnError();
+
+    if(commentError) throw new Error("Failed to insert comment")
 
   revalidatePath(`/post/${post?.slug}`);
 };

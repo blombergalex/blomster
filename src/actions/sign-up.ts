@@ -18,7 +18,6 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
     .single();
 
   if (existingUsername) {
-    console.log(existingUsername);
     throw new Error("Username already taken");
   }
 
@@ -42,12 +41,10 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
   }
 
   if (user && user.email) {
-    const { data: userInfo, error: registerError } =  await supabase
+    const { error: registerError } =  await supabase
       .from("users")
       .insert([{ id: user.id, email: user.email, username: data.username }])
       .select('*')
-
-      console.log(userInfo, registerError)
 
     if (registerError) {
         throw new Error('Could not register public user')
