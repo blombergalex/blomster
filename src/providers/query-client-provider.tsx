@@ -15,10 +15,8 @@ let browserQueryClient: QueryClient | undefined = undefined
 
 export const getQueryClient = () => {
   if (typeof window === 'undefined') {
-    // server
     return makeQueryClient()
   } else {
-    // browser
     if (!browserQueryClient) browserQueryClient = makeQueryClient()
     return browserQueryClient
   }
