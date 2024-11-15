@@ -1,5 +1,3 @@
-//move to supabase folder?
-
 import { createServerClient } from "@supabase/ssr"
 import { NextResponse, NextRequest } from "next/server"
 
@@ -37,6 +35,8 @@ export const middleware = async (request: NextRequest) => {
     return NextResponse.redirect(url)
   }
 
+  
+
   return supabaseResponse
 }
 
@@ -44,9 +44,3 @@ const protectedRoutes = [
   /^\/create$/,
   /^\/post\/[^\/]+\/edit$/
 ]
-
-
-// the middleware is active right before a component is rendered
-// in this case we want it to check that the user information is updated before rendering it
-// taget från dokumentationen, såhär vill supabase att man hanterar cookien med Next
-

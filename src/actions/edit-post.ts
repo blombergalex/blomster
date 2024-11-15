@@ -50,7 +50,7 @@ export const editPost = async ({
 
   if (profileError || !profile) {
     throw new Error(
-      "User profile not found, valid user login is needed to post"
+      "User profile not found, valid user login is needed to edit and post"
     );
   }
 
