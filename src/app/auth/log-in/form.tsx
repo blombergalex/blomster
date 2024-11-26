@@ -15,7 +15,9 @@ import { handleServerError } from "@/utils/action-utils";
 
 export const LogInForm = () => {
   const { mutate, isPending } = useMutation({
-    mutationFn: logIn,
+    mutationFn: async (variables:z.infer<typeof logInSchema>) => {
+      handleServerError(await logIn(variables))
+    },
     onError: (error) => toast.error(error.message),
     onSuccess: (result, variables) => {
       console.log({result, variables})
@@ -33,7 +35,7 @@ export const LogInForm = () => {
 
   return (
     <form
-      onSubmit={handleSubmit((values) => handleServerError(mutate(values)))}
+      onSubmit={handleSubmit((values) => mutate(values))}
       className="flex w-full flex-col max-w-md gap-4"
     >
       <div className="flex flex-col gap-4 items-center mx-4">
