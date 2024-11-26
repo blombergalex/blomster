@@ -23,3 +23,14 @@ export function createServerAction<Return, Args extends unknown[] = []>(
     }
   };
 }
+
+export function handleServerError<Return, Args extends unknown[] = []>(
+  callback: (...args: Args) => Promise<ServerActionResult<Return>>,
+){
+  return async (...args: Args) => {
+    const result = await callback(...args)
+    if (!result.success) {
+      throw result.error;
+    } 
+  };
+}

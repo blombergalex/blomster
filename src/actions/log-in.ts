@@ -14,7 +14,7 @@ export const logIn = createServerAction(async (data: z.infer<typeof logInSchema>
 
   const {error} = await supabase.auth.signInWithPassword(parsedData)
   if (error) {
-    console.log("error: ", error?.message)
+    console.error("error: ", error?.message)
     throw new ServerActionError(error.message || "Failed to login")
   }
 

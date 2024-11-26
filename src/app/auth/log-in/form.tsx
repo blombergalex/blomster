@@ -11,12 +11,14 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { errorClasses, buttonClasses, inputClasses } from "@/utils/classes";
+import { handleServerError } from "@/utils/action-utils";
 
 export const LogInForm = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: logIn,
     onError: (error) => toast.error(error.message),
-    onSuccess: (_, variables) => {
+    onSuccess: (result, variables) => {
+      console.log({result, variables})
       toast.success(`Logged in with ${variables.email}`);
     }
   });
@@ -31,7 +33,7 @@ export const LogInForm = () => {
 
   return (
     <form
-      onSubmit={handleSubmit((values) => mutate(values))}
+      onSubmit={handleSubmit((values) => handleServerError(mutate(values)))}
       className="flex w-full flex-col max-w-md gap-4"
     >
       <div className="flex flex-col gap-4 items-center mx-4">
