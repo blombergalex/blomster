@@ -11,10 +11,13 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { handleServerError } from "@/utils/action-utils";
 
 export default function CreatePage() {
   const { mutate, isPending } = useMutation({
-    mutationFn: createPost,
+    mutationFn: async (variables:z.infer<typeof postSchema>) => {
+      handleServerError(await createPost(variables))
+    },
     onError: (error) => toast.error(error.message),
   });
 
