@@ -38,7 +38,7 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
   } = await supabase.auth.signUp(parsedData);
 
   if (authError) {
-    return { authError };
+    return { error: authError.message };
   }
 
   if (user && user.email) {
