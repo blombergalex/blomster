@@ -19,7 +19,8 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
 
   if (existingUsername) {
     console.log(existingUsername);
-    throw new Error("Username already taken");
+    // throw new Error("Username already taken");
+    return { error: "Username already taken" };
   }
 
   const { data: existingUserEmail } = await supabase
@@ -30,7 +31,7 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
 
   if (existingUserEmail) {
     // throw new Error("A user with this email already exists");
-    return {error: "A user with this email already exists"}
+    return { error: "A user with this email already exists" };
   }
 
   const {
@@ -39,7 +40,8 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
   } = await supabase.auth.signUp(parsedData);
 
   if (authError) {
-    throw authError;
+    // throw authError;
+    return { error: authError };
   }
 
   if (user && user.email) {
@@ -51,7 +53,8 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
     console.log(userInfo, registerError);
 
     if (registerError) {
-      throw new Error("Could not register public user");
+      // throw new Error("Could not register public user");
+      return { error: "Could not register public user" };
     }
   }
 
