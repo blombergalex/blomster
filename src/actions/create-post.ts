@@ -19,7 +19,6 @@ export const createPost = async (
   } = await supabase.auth.getUser();
 
   if (!user) {
-    // throw new Error("User not authenticated");
     return { error: "User not authenticated" };
   }
 
@@ -30,7 +29,6 @@ export const createPost = async (
     .single();
 
   if (profileError || !profile) {
-    // throw new Error("User profile not found, valid user login is needed to post");
     return {
       error: "User profile not found, valid user login is needed to post",
     };
