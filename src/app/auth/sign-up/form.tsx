@@ -10,10 +10,13 @@ import { useMutation } from "@tanstack/react-query";
 import { signUpSchema } from "@/actions/schemas";
 import { signUp } from "@/actions/sign-up";
 import { buttonClasses, errorClasses, inputClasses } from "@/utils/classes";
+import { handleServerError } from "@/utils/action-utils";
 
 export const SignUpForm = () => {
   const { mutate, isPending } = useMutation({
-    mutationFn: signUp,
+    mutationFn: async (variables:z.infer<typeof signUpSchema>) => {
+      handleServerError(await signUp(variables))
+    },
     onError: (error) => toast.error(error.message),
     onSuccess: () => toast.success('Account created successfully')
   })

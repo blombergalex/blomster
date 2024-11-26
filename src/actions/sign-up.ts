@@ -29,7 +29,8 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
     .single();
 
   if (existingUserEmail) {
-    throw new Error("A user with this email already exists");
+    // throw new Error("A user with this email already exists");
+    return {error: "A user with this email already exists"}
   }
 
   const {
@@ -42,18 +43,17 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
   }
 
   if (user && user.email) {
-    const { data: userInfo, error: registerError } =  await supabase
+    const { data: userInfo, error: registerError } = await supabase
       .from("users")
       .insert([{ id: user.id, email: user.email, username: data.username }])
-      .select('*')
+      .select("*");
 
-      console.log(userInfo, registerError)
+    console.log(userInfo, registerError);
 
     if (registerError) {
-        throw new Error('Could not register public user')
-      }
+      throw new Error("Could not register public user");
+    }
   }
-    
-  redirect("/");
 
+  redirect("/");
 };
