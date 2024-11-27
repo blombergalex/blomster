@@ -5,6 +5,12 @@ import { SignUpForm } from './form'
 export default function LogInPage() {
   return (
     <main className='main flex h-screen flex-col items-center justify-center gap-6'>
+      <Link
+        className="uppercase font-bold text-medium self-start absolute top-8 left-8 text-foreground"
+        href="/"
+      >
+        Blomster
+      </Link>
       <div className='flex w-full flex-col items-center gap-12'>
         <h1 className='text-2xl font-bold'>Welcome to Blomster</h1>
         <SignUpForm />
